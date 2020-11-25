@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using HandleC;
 
 public class CarSecond : MonoBehaviourPunCallbacks
 {
@@ -24,7 +25,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
     public Animator animator;
     public GameObject car_model;
 
-    handleclass HANDLE_INPUT;
+    HC HANDLE_INPUT = new HC();
 
 
     //仮設置移行予定
@@ -40,8 +41,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
         rb.useGravity = false;
         speed = 0.0f;
         direction = 1.0f;
-        HANDLE_INPUT = this.GetComponent<handleclass>();
-
        
 
         //仮設置移行予定
@@ -59,24 +58,24 @@ public class CarSecond : MonoBehaviourPunCallbacks
         }
 
         // 前に移動
-        if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator) > 0.1f)
+        if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
         {
-            if (speed >= max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator))
+            if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
             {
                 speed -= 0.5f;
-                if (speed <= max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator) + 0.5f)
-                    speed = max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator);
+                if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator) + 0.5f)
+                    speed = max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator);
             }
             else
             {
                 speed += 0.5f;
             }
-            if (HANDLE_INPUT.Button(handleclass.Buttons.A) || Input.GetKey(KeyCode.W))
+            if (HANDLE_INPUT.Button(HC.Buttons.A) || Input.GetKey(KeyCode.W))
             {
                 speed = max_speed * 2;
             }
         }
-        else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(handleclass.Pedals.brake) > 0.1f)
+        else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
         {
             speed -= 2.0f;
             if (speed <= -25.0f)
