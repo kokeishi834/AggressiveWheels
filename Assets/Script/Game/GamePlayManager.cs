@@ -55,8 +55,7 @@ public class GamePlayManager : MonoBehaviour
     {
         GameObject.Instantiate(obj[car_num], new Vector3(0, 2.0f, 0), Quaternion.identity);
         obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
-        //Debug.Log("c" + car_num);
-        //Debug.Log("p" + parts_num);
+        
         
     }
 
