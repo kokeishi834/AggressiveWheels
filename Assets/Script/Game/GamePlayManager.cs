@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GamePlayManager : MonoBehaviour
 {
     public int goal_appearance = 0;//ゴール出現までの時間
@@ -25,6 +26,14 @@ public class GamePlayManager : MonoBehaviour
     void Update()
     {
         count++;
+        if (count >= goal_appearance * 60)
+        {
+            // イベントに登録
+            SceneManager.sceneLoaded += GameSceneLoaded;
+            //シーン移行
+            SceneManager.LoadScene("ResultScene");
+        }
+
         //if(/*count >= goal_appearance * 30*/ kill_enemy_num >= enemy_num)//指定の時間が経過したらゴールを出現させる,30fps
         //{
         //    goal.SetActive(true);
@@ -46,8 +55,7 @@ public class GamePlayManager : MonoBehaviour
     {
         GameObject.Instantiate(obj[car_num], new Vector3(0, 2.0f, 0), Quaternion.identity);
         obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
-        //Debug.Log("c" + car_num);
-        //Debug.Log("p" + parts_num);
+        
         
     }
 
@@ -61,5 +69,22 @@ public class GamePlayManager : MonoBehaviour
             goal.SetActive(true);
             goal.GetComponent<GoalController>().SetCount(count);
         }
+    }
+
+
+    //シーン遷移時にポイントを渡す関数（要調整）
+    private void GameSceneLoaded(Scene next, LoadSceneMode mode)
+    {
+
+        // シーン切り替え後のスクリプトを取得
+        var gameManager = GameObject.FindWithTag("ResultManager").GetComponent<ResultController>();
+
+
+        // データを渡す処理
+        //gameManager.SetResultScore(point);
+        //gameManager.SetResultTime(time);
+
+        // イベントから削除
+        SceneManager.sceneLoaded -= GameSceneLoaded;
     }
 }

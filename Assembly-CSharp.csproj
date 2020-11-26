@@ -63,50 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
-    <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
-    <Compile Include="Assets\Script\BulletController.cs" />
     <Compile Include="Assets\Script\CarSecond.cs" />
-    <Compile Include="Assets\Script\CheakPointController.cs" />
-    <Compile Include="Assets\Script\CollisionController.cs" />
-    <Compile Include="Assets\Script\EnemyController.cs" />
-    <Compile Include="Assets\Script\ExplosionController.cs" />
     <Compile Include="Assets\Script\Game\GamePlayManager.cs" />
-    <Compile Include="Assets\Script\GoalController.cs" />
-    <Compile Include="Assets\Script\GoalEffectController.cs" />
-    <Compile Include="Assets\Script\GunController.cs" />
-    <Compile Include="Assets\Script\HpDisplay.cs" />
-    <Compile Include="Assets\Script\InstanceToPlayer1.cs" />
-    <Compile Include="Assets\Script\PlayerController.cs" />
-    <Compile Include="Assets\Script\PointController.cs" />
-    <Compile Include="Assets\Script\PointDisplay.cs" />
-    <Compile Include="Assets\Script\Result\ResultController.cs" />
-    <Compile Include="Assets\Script\Result\ResultPointDisplay.cs" />
-    <Compile Include="Assets\Script\Result\ResultTimeDisplay.cs" />
-    <Compile Include="Assets\Script\Select\BackButtonController.cs" />
-    <Compile Include="Assets\Script\Select\CarButtonController.cs" />
-    <Compile Include="Assets\Script\Select\PartsButtonController.cs" />
-    <Compile Include="Assets\Script\Select\SelectManager.cs" />
-    <Compile Include="Assets\Script\Select\SelectTextController.cs" />
-    <Compile Include="Assets\Script\StageController.cs" />
-    <Compile Include="Assets\Script\Title\TitleController.cs" />
-    <Compile Include="Assets\Script\car_prot.cs" />
-    <Compile Include="Assets\Script\handleclass.cs" />
-    <Compile Include="Assets\Script\lookOn.cs" />
-    <Compile Include="Assets\Script\lookOnPlayer.cs" />
-    <Compile Include="Assets\Script\test.cs" />
-    <Compile Include="Assets\c.cs" />
-    <Compile Include="Assets\camera.cs" />
     <Compile Include="Assets\handle.cs" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
@@ -681,49 +639,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
-      <Project>{76BE27A5-D1D0-DD4B-399A-590B7216630E}</Project>
-      <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
-      <Project>{50E4B946-4775-DEC4-37A6-6AB36C838758}</Project>
-      <Name>PunDemos.DemoHubEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
-      <Project>{4703D269-B32E-0D3D-667E-0701DA83BA03}</Project>
-      <Name>PunDemos.DemoSlotcarEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
-      <Project>{459C38A0-DC99-30EF-37A4-4D6453590D28}</Project>
-      <Name>PhotonUnityNetworking.Demos</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
-      <Project>{7D1C3D41-D508-6F89-ACE8-294541A21AB0}</Project>
-      <Name>PhotonUnityNetworking.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonWebSocket.csproj">
-      <Project>{EA41FC98-3BD1-99F5-5181-D5F59FA6F8E2}</Project>
-      <Name>PhotonWebSocket</Name>
-    </ProjectReference>
     <ProjectReference Include="PhotonRealtime.csproj">
       <Project>{59F3C2EE-C0AA-81EB-5376-0A6A6F7B8602}</Project>
       <Name>PhotonRealtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.csproj">
-      <Project>{25DDA96F-4146-3361-F914-29A2C59E77FB}</Project>
-      <Name>PhotonUnityNetworking</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonChat.csproj">
-      <Project>{A402A21F-4FD9-09DA-D0C3-ECB980A4F66A}</Project>
-      <Name>PhotonChat</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
-      <Project>{D581898A-92C9-0934-D8AD-EF7D663AB928}</Project>
-      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
-      <Project>{951BF66E-A765-DF56-C12C-C92A2C489CC2}</Project>
-      <Name>PhotonUnityNetworking.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
