@@ -117,7 +117,11 @@ MonoBehaviour:
   m_MinSize: {x: 936, y: 442}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 138
+=======
+  controlID: 194
+>>>>>>> Photon
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +146,11 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 63
+=======
+  controlID: 62
+>>>>>>> Photon
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +230,11 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 102
+=======
+  controlID: 104
+>>>>>>> Photon
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,8 +254,13 @@ MonoBehaviour:
     y: 0
     width: 204
     height: 304
+<<<<<<< HEAD
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
+=======
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> Photon
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -320,15 +337,24 @@ MonoBehaviour:
     y: 0
     width: 439
     height: 731
+<<<<<<< HEAD
   m_MinSize: {x: 301, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
+=======
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> Photon
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 22}
   - {fileID: 23}
   - {fileID: 24}
   m_Selected: 1
+<<<<<<< HEAD
   m_LastSelected: 2
+=======
+  m_LastSelected: 0
+>>>>>>> Photon
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -457,9 +483,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 2.5130625, y: -2.109937, z: 1.0638268}
     speed: 2
     m_Value: {x: 2.5130625, y: -2.109937, z: 1.0638268}
+=======
+    m_Target: {x: 0, y: 3, z: 0}
+    speed: 2
+    m_Value: {x: 0, y: 3, z: 0}
+>>>>>>> Photon
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -509,9 +541,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_Size:
+<<<<<<< HEAD
     m_Target: 9.453698
     speed: 2
     m_Value: 9.453698
+=======
+    m_Target: 10
+    speed: 2
+    m_Value: 10
+>>>>>>> Photon
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -684,9 +722,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: da380000
       m_LastClickedID: 0
       m_ExpandedIDs: bef1ffff00f2ffff20f2ffff2af4ffff7ef7ffffe8faffff
+=======
+      m_SelectedIDs: 42390000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 42c9ffff74cbffff94cbffff88cdffffdad0fffff2d0ffffd2d2ffff1ed3ffff3ed3ffff42d5ffff56ddffff44e2ffffd2ebffff54ecffff74ecffff76ecffffc4edffffe4edffffeeefffff96f5ffff70f6ffff88f6ffff50f7ffff72f7ffffc6f9ffff6afbffff
+>>>>>>> Photon
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -786,23 +830,29 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: d0380000
     m_LastClickedID: 14544
     m_ExpandedIDs: 000000009e38000000ca9a3b
+=======
+    m_SelectedIDs: a2380000
+    m_LastClickedID: 14498
+    m_ExpandedIDs: 00000000683800009c380000ac38000000ca9a3b
+>>>>>>> Photon
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Resources
+      m_OriginalName: Resources
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 14496
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 12}
     m_SearchString: 
@@ -816,7 +866,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000009e380000
+=======
+    m_ExpandedIDs: 0000000068380000
+>>>>>>> Photon
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -908,7 +962,11 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
+<<<<<<< HEAD
   m_LastInspectedObjectInstanceID: 14554
+=======
+  m_LastInspectedObjectInstanceID: 14658
+>>>>>>> Photon
   m_LastVerticalScrollValue: 0
 --- !u!114 &23
 MonoBehaviour:
