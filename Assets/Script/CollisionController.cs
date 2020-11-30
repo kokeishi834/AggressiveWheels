@@ -34,15 +34,20 @@ public class CollisionController : MonoBehaviour
             //弾を消す
             Destroy(gameObject);
             //敵にダメージを与える
-            if (other.tag == "Player2")
-            {
-                Debug.Log("Player2 Hit");
-            }
-            else
-            {
-                other.GetComponent<EnemyController>().Damage(power, owner);
-            }
+            other.GetComponent<EnemyController>().Damage(power, owner);
         }
+
+        if (owner.tag == "Enemy" && other.tag == "Player")// || other.tag == "Player2"))
+        {
+            //爆発エフェクトの呼び出し
+            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
+            //弾を消す
+            Destroy(gameObject);
+            //Playerにダメージを与える
+            other.GetComponent<CarSecond>().PlayerDamage(power, owner);
+        }
+
         //else if (owner.tag == "Player2" && (other.tag == "Enemy" || other.tag == "Player1"))
         //{
         //    //爆発エフェクトの呼び出し
@@ -77,6 +82,31 @@ public class CollisionController : MonoBehaviour
         //        Debug.Log("Player2 Hit");
         //    }
         //}
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (owner.tag == "Player" && other.collider.tag == "Enemy")// || other.tag == "Player2"))
+        {
+            //爆発エフェクトの呼び出し
+            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
+            //弾を消す
+            Destroy(gameObject);
+            //敵にダメージを与える
+            other.gameObject.GetComponent<EnemyController>().Damage(power, owner);
+        }
+
+        if (owner.tag == "Enemy" && other.collider.tag == "Player")// || other.tag == "Player2"))
+        {
+            //爆発エフェクトの呼び出し
+            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
+            //弾を消す
+            Destroy(gameObject);
+            //Playerにダメージを与える
+            other.gameObject.GetComponent<CarSecond>().PlayerDamage(power, owner);
+        }
     }
 
     //所有権を渡す関数

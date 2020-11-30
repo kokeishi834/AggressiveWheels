@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 4442603567289306953}
   - component: {fileID: 4442603567289306958}
   - component: {fileID: 4442603567289306957}
-  - component: {fileID: 8803442583799243488}
   - component: {fileID: 4442603567289306956}
   - component: {fileID: 7101906433008422631}
   - component: {fileID: 3892031312189237486}
@@ -264,7 +263,7 @@ Rigidbody:
   m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -283,19 +282,6 @@ CapsuleCollider:
   m_Height: 1.7336897
   m_Direction: 2
   m_Center: {x: -0.006031275, y: 0.020947456, z: 0.1620943}
---- !u!114 &8803442583799243488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442603567289306947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3565084f0311a2469d1556994248867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HANDLE_LIMIT: 50
 --- !u!114 &4442603567289306956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gravity: {x: 0, y: -50, z: 0}
-  gun_num: 0
   gun:
   - {fileID: 1616331748713052946, guid: 3a313213d80a7374bb16313ad146bfc4, type: 3}
   - {fileID: 169272715440955431, guid: 0c74bbf175547434280ccd54c0dc39c2, type: 3}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using HandleC;
 
 public class CarSecond : MonoBehaviourPunCallbacks
 {
@@ -17,15 +18,14 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
     float direction;
 
+    HC HANDLE_INPUT = new HC();
+
     public float max_speed = 100.0f;
     public float accelerator = 0.5f;
     public float max_rotate = 4.0f;
 
     public Animator animator;
     public GameObject car_model;
-
-    handleclass HANDLE_INPUT;
-
 
     //仮設置移行予定
     public int player_hp = 0;
@@ -40,8 +40,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
         rb.useGravity = false;
         speed = 0.0f;
         direction = 1.0f;
-        HANDLE_INPUT = this.GetComponent<handleclass>();
-
        
 
         //仮設置移行予定
@@ -54,29 +52,30 @@ public class CarSecond : MonoBehaviourPunCallbacks
     {
         HANDLE_INPUT.UpdateJoyPad();
 
-        if (this.GetComponent<PhotonView>().IsMine)
-        {
-        }
+        //if (!this.GetComponent<PhotonView>().IsMine)
+        //{
+        //    return;
+        //}
 
         // 前に移動
-        if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator) > 0.1f)
+        if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
         {
-            if (speed >= max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator))
+            if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
             {
                 speed -= 0.5f;
-                if (speed <= max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator) + 0.5f)
-                    speed = max_speed * HANDLE_INPUT.Pedal(handleclass.Pedals.accelerator);
+                if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator) + 0.5f)
+                    speed = max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator);
             }
             else
             {
                 speed += 0.5f;
             }
-            if (HANDLE_INPUT.Button(handleclass.Buttons.A) || Input.GetKey(KeyCode.W))
+            if (HANDLE_INPUT.Button(HC.Buttons.A) || Input.GetKey(KeyCode.W))
             {
                 speed = max_speed * 2;
             }
         }
-        else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(handleclass.Pedals.brake) > 0.1f)
+        else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
         {
             speed -= 2.0f;
             if (speed <= -25.0f)
@@ -143,6 +142,8 @@ public class CarSecond : MonoBehaviourPunCallbacks
             }
             car_model.transform.localPosition = new Vector3(0.0f, handle_N * 0.3f, 0.0f);
         }
+
+
         rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
 
 
@@ -180,6 +181,15 @@ public class CarSecond : MonoBehaviourPunCallbacks
             //爆発エフェクトの呼び出し
             GameObject burst_spark = GameObject.Find("eff_burst_spark");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
+        }
+    }
+
+    public void PlayerDamage(int damage, GameObject owner)
+    {
+        if (owner.gameObject.tag == "Enemy")
+        {
+            //体力減少
+            player_hp -= damage;
         }
     }
 

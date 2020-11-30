@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using HandleC;
 
 public class GunController : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
-    handleclass HANDLE_INPUT;
+    HC HANDLE_INPUT = new HC();
 
     public int damage = 10;
     public int late = 10;
@@ -15,7 +16,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        HANDLE_INPUT = this.GetComponent<handleclass>();
+        //HANDLE_INPUT = this.GetComponent<HC>();
         //修正する箇所
         //transform.parent = transform.GetChild(1).gameObject.transform;
         transform.position = GameObject.Find("shooter").transform.position;
@@ -28,7 +29,7 @@ public class GunController : MonoBehaviourPunCallbacks
         HANDLE_INPUT.UpdateJoyPad();
 
         //Xキーで発射
-        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(handleclass.Buttons.ShiftDown) || HANDLE_INPUT.Button(handleclass.Buttons.ShiftUp))
+        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(HC.Buttons.ShiftDown) || HANDLE_INPUT.Button(HC.Buttons.ShiftUp))
         {
             if (shot_late % late == 0)
             {
