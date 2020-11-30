@@ -24,7 +24,7 @@ public class StageController : MonoBehaviourPunCallbacks
     {
         Debug.Log("join room");
         // マッチング後、自分自身のネットワークオブジェクトを生成する
-        PhotonNetwork.Instantiate(obj.name, new Vector3(0.0f,-6.0f,0.0f), Quaternion.identity);
+        PhotonNetwork.Instantiate(obj.name, Vector3.zero, Quaternion.identity);
     }
 
 

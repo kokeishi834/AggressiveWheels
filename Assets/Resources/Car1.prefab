@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gravity: {x: 0, y: -50, z: 0}
+  gun_num: 0
   gun:
   - {fileID: 1616331748713052946, guid: 3a313213d80a7374bb16313ad146bfc4, type: 3}
   - {fileID: 169272715440955431, guid: 0c74bbf175547434280ccd54c0dc39c2, type: 3}
