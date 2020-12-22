@@ -25,7 +25,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
     public float max_speed = 100.0f;
     public float accelerator = 0.5f;
     public float max_rotate = 4.0f;
-    public float max_energy = 10.0f;
+    public float max_energy = 1.0f;
 
     public Animator animator;
     public GameObject car_model;
@@ -34,9 +34,9 @@ public class CarSecond : MonoBehaviourPunCallbacks
     public int player_hp = 0;
     int max_hp;//初期体力を入れておく変数
 
-    public GameObject speed_meter = null;
-
-    public GameObject energy_meter = null;
+    GameObject speed_meter = null;
+    GameObject energy_meter = null;
+    GameObject speed_num = null;
 
 
     // Start is called before the first frame update
@@ -48,6 +48,10 @@ public class CarSecond : MonoBehaviourPunCallbacks
         speed = 0.0f;
         direction = 1.0f;
         energy = max_energy;
+
+        speed_meter = GameObject.Find("speed");
+        energy_meter = GameObject.Find("energy");
+        speed_num = GameObject.Find("numspeed");
 
         //仮設置移行予定
         max_hp = player_hp;
@@ -67,7 +71,23 @@ public class CarSecond : MonoBehaviourPunCallbacks
         // 前に移動
         if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
         {
-            if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
+            if ((HANDLE_INPUT.Button(HC.Buttons.A) || 
+               HANDLE_INPUT.Button(HC.Buttons.B) || 
+               HANDLE_INPUT.Button(HC.Buttons.C) || 
+               Input.GetKey(KeyCode.W))
+               && energy >= 0.0f)
+            {
+                if (speed <= max_speed * 1.3f)
+                {
+                    speed += accelerator*2.0f;
+                    if (speed >= max_speed * 1.3f)
+                    {
+                        speed = max_speed * 1.3f;
+                    }
+                }
+                energy -= 0.1f;
+            }
+            else if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
             {
                 speed -= 0.5f;
                 if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator) + 0.5f)
@@ -76,14 +96,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
             else
             {
                 speed += 0.5f;
-            }
-            if (HANDLE_INPUT.Button(HC.Buttons.A) || Input.GetKey(KeyCode.W))
-            {
-                if(energy <= 0.0f)
-                {
-                    speed = max_speed * 2;
-                    energy -= Time.deltaTime;
-                }
             }
         }
         else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
@@ -138,10 +150,11 @@ public class CarSecond : MonoBehaviourPunCallbacks
             direction = -1.0f;
         }
         speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
+        speed_num.GetComponent<Text>().text = ((int)speed).ToString();
 
         if(Input.GetKey(KeyCode.P))
         {
-            energy += Time.deltaTime;
+            energy += 0.1f;
             if(energy >= max_energy)
             {
                 energy = max_energy;
