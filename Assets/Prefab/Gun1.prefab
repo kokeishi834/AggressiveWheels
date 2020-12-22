@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 967888375159036615}
   - component: {fileID: 1922813808904145483}
   - component: {fileID: 1922813808904145495}
-  - component: {fileID: 1922813808904145494}
   m_Layer: 0
   m_Name: Gun1
   m_TagString: Player
@@ -110,16 +109,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7647898791156031570, guid: e0c01a6e08d1ae147af8c301f4d1e3e6, type: 3}
   speed: 10000
---- !u!114 &1922813808904145494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616331748713052946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3565084f0311a2469d1556994248867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HANDLE_LIMIT: 50
