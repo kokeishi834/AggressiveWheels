@@ -38,6 +38,9 @@ public class CarSecond : MonoBehaviourPunCallbacks
     GameObject energy_meter = null;
     GameObject speed_num = null;
 
+    Vector3 last_velocity;
+
+    bool drift;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
         //仮設置移行予定
         max_hp = player_hp;
 
+        drift = false;
     }
 
     // Update is called once per frame
@@ -68,91 +72,137 @@ public class CarSecond : MonoBehaviourPunCallbacks
         //    return;
         //}
 
-        // 前に移動
-        if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
+        //ハンドル制御
         {
-            if ((HANDLE_INPUT.Button(HC.Buttons.A) || 
-               HANDLE_INPUT.Button(HC.Buttons.B) || 
-               HANDLE_INPUT.Button(HC.Buttons.C) || 
-               Input.GetKey(KeyCode.W))
-               && energy >= 0.0f)
+            last_velocity = rb.velocity;
+            if (speed >= 0.0f)
             {
-                if (speed <= max_speed * 1.3f)
+                handle = HANDLE_INPUT.LimitHandle();
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    speed += accelerator*2.0f;
-                    if (speed >= max_speed * 1.3f)
-                    {
-                        speed = max_speed * 1.3f;
-                    }
+                    handle = -0.5f;
                 }
-                energy -= 0.1f;
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    handle = 0.5f;
+                }
+                direction = 1.0f;
             }
-            else if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
+            else if (speed < -0.1f)
             {
-                speed -= 0.5f;
-                if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator) + 0.5f)
-                    speed = max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator);
+                handle = -HANDLE_INPUT.LimitHandle();
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    handle = 0.5f;
+                }
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    handle = -0.5f;
+                }
+                direction = -1.0f;
+            }
+
+            transform.Rotate(new Vector3(0.0f, handle * max_rotate, 0.0f));
+            car_model.transform.localRotation = Quaternion.Euler(0, 0, handle * (-30.0f * direction));
+            animator.SetFloat("turn", handle * 10);
+
+            if (handle != 0.0f)
+            {
+                float handle_N;
+                if (handle < 0.0f)
+                {
+                    handle_N = -handle;
+                }
+                else
+                {
+                    handle_N = handle;
+                }
+                car_model.transform.localPosition = new Vector3(0.0f, handle_N * 0.3f, 0.0f);
+            }
+        }
+
+        //アクセル&ブレーキの処理
+        {
+            if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
+            {
+                if ((HANDLE_INPUT.Button(HC.Buttons.A) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C) ||
+                   Input.GetKey(KeyCode.W))
+                   && energy >= 0.0f)
+                {
+                    if (speed <= max_speed * 1.3f)
+                    {
+                        speed += accelerator * 2.0f;
+                        if (speed >= max_speed * 1.3f)
+                        {
+                            speed = max_speed * 1.3f;
+                        }
+                    }
+                    energy -= 0.1f;
+                }
+                else if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator))
+                {
+                    speed -= 0.5f;
+                    if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator) + 0.5f)
+                        speed = max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator);
+                }
+                else
+                {
+                    speed += accelerator;
+                }
+
+                if (HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
+                {
+                    drift = true;
+                    if (handle < 0)
+                    {
+                        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + -60.0f, 0.0f));
+                    }
+                    if (handle > 0)
+                    {
+                        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + 60.0f, 0.0f));
+                    }
+
+                    rb.velocity = last_velocity + car_model.transform.forward.normalized;
+                    rb.velocity.Normalize();
+                }
+                else
+                {
+                    drift = false;
+                }
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
+            {
+                speed -= 2.0f;
+                if (speed <= -25.0f)
+                {
+                    speed = -25.0f;
+                }
             }
             else
             {
-                speed += 0.5f;
-            }
-        }
-        else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
-        {
-            speed -= 2.0f;
-            if (speed <= -25.0f)
-            {
-                speed = -25.0f;
-            }
-        }
-        else
-        {
-            if (speed > 0.0f)
-            {
-                speed -= 1.0f;
-            }
-            else if (speed < 0.0f)
-            {
-                speed += 1.0f;
+                if (speed > 0.0f)
+                {
+                    speed -= 1.0f;
+                }
+                else if (speed < 0.0f)
+                {
+                    speed += 1.0f;
+                }
+
+                if (speed <= 0.5f && speed >= -0.5f)
+                {
+                    speed = 0.0f;
+                }
             }
 
-            if (speed <= 0.5f && speed >= -0.5f)
-            {
-                speed = 0.0f;
-            }
+            speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
+            speed_num.GetComponent<Text>().text = ((int)speed).ToString();
         }
 
-        if (speed >= 0.0f)
-        {
-            handle = HANDLE_INPUT.LimitHandle();
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                handle = -0.5f;
-            }
-            else if (Input.GetKey(KeyCode.RightArrow))
-            {
-                handle = 0.5f;
-            }
-            direction = 1.0f;
-        }
-        else if (speed < -0.1f)
-        {
-            handle = -HANDLE_INPUT.LimitHandle();
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                handle = 0.5f;
-            }
-            else if (Input.GetKey(KeyCode.RightArrow))
-            {
-                handle = -0.5f;
-            }
-            direction = -1.0f;
-        }
-        speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
-        speed_num.GetComponent<Text>().text = ((int)speed).ToString();
 
-        if(Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.P))
         {
             energy += 0.1f;
             if(energy >= max_energy)
@@ -162,36 +212,10 @@ public class CarSecond : MonoBehaviourPunCallbacks
         }
         energy_meter.GetComponent<Image>().fillAmount = (float)(energy / max_energy);
 
-
-        transform.Rotate(new Vector3(0.0f, handle * max_rotate, 0.0f));
-        car_model.transform.localRotation = Quaternion.Euler(0, 0, handle * (-30.0f * direction));
-        if (handle != 0.0f)
+        if(!drift)
         {
-            float handle_N;
-            if (handle < 0.0f)
-            {
-                handle_N = -handle;
-            }
-            else
-            {
-                handle_N = handle;
-            }
-            car_model.transform.localPosition = new Vector3(0.0f, handle_N * 0.3f, 0.0f);
+            rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
         }
-
-
-        rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
-
-
-        animator.SetFloat("turn", handle * 10);
-        //Debug.Log(car_model.transform.localPosition.y);
-
-        //rb.velocity = transform.forward * speed;
-        //Debug.Log(input.Rz);
-        //Debug.Log(Mathf.Sin(transform.rotation.y));
-
-
-        //Debug.Log(handle);
 
         //仮設置移行予定
 
