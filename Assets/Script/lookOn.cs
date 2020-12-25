@@ -59,7 +59,7 @@ public class lookOn : MonoBehaviour
         {
             //最も近かったオブジェクトを取得
             nearObj = serchTag(gameObject, other.tag);
-            parent.transform.LookAt(new Vector3(nearObj.transform.position.x,parent.transform.position.y,nearObj.transform.position.z));
+            //parent.transform.LookAt(new Vector3(nearObj.transform.position.x,parent.transform.position.y,nearObj.transform.position.z));
             this.transform.LookAt(nearObj.transform);
             if (searchTime >= interval)
             {

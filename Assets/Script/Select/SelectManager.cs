@@ -61,7 +61,8 @@ public class SelectManager : MonoBehaviour
         // イベントに登録
         SceneManager.sceneLoaded += GameSceneLoaded;
 
-        SceneManager.LoadScene("GameScene");
+        //SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("test");
     }
 
     //戻るボタンが押された時の処理

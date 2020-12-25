@@ -152,25 +152,25 @@ public class CarSecond : MonoBehaviourPunCallbacks
                     speed += accelerator;
                 }
 
-                if (HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
-                {
-                    drift = true;
-                    if (handle < 0)
-                    {
-                        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + -60.0f, 0.0f));
-                    }
-                    if (handle > 0)
-                    {
-                        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + 60.0f, 0.0f));
-                    }
+                //if (HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
+                //{
+                //    drift = true;
+                //    if (handle < 0)
+                //    {
+                //        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + -60.0f, 0.0f));
+                //    }
+                //    if (handle > 0)
+                //    {
+                //        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + 60.0f, 0.0f));
+                //    }
 
-                    rb.velocity = last_velocity + car_model.transform.forward.normalized;
-                    rb.velocity.Normalize();
-                }
-                else
-                {
-                    drift = false;
-                }
+                //    rb.velocity = last_velocity + car_model.transform.forward.normalized;
+                //    rb.velocity.Normalize();
+                //}
+                //else
+                //{
+                //    drift = false;
+                //}
             }
             else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
             {
