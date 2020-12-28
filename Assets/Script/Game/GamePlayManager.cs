@@ -25,6 +25,11 @@ public class GamePlayManager : MonoBehaviour
     void Update()
     {
         count++;
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            KillEnemy();
+        }
         //if(/*count >= goal_appearance * 30*/ kill_enemy_num >= enemy_num)//指定の時間が経過したらゴールを出現させる,30fps
         //{
         //    goal.SetActive(true);

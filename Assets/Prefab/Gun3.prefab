@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  late: 5
+  late: 2
 --- !u!114 &2673765298920839898
 MonoBehaviour:
   m_ObjectHideFlags: 0
