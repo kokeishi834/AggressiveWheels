@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3892031312189237486}
   - component: {fileID: 1242273086088105982}
   - component: {fileID: 6480706565486898016}
+  - component: {fileID: 4754645277791590243}
   m_Layer: 0
   m_Name: Car2
   m_TagString: Player
@@ -146,7 +147,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4442603567289306947}
   m_Material: {fileID: 13400000, guid: b5d32b39c202c9c4faff05d1c63bbfab, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.36572933
   m_Height: 1.7336897
   m_Direction: 2
@@ -240,6 +241,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!65 &4754645277791590243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442603567289306947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.8, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4442603567340105906
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class NavMeshTest : MonoBehaviour
         //Debug.Log(Mathf.Sqrt(dis_x * dis_x + dis_z * dis_z));
         if (agent_range + range >= Mathf.Sqrt(dis_x * dis_x + dis_z* dis_z))
         {
-            Debug.Log(target.Length);
+            //Debug.Log(target.Length);
             {
                 if (goal != target.Length - 1)
                 {
