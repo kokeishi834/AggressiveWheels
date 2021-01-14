@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1185430968286507033}
   - component: {fileID: 9093378852860761659}
   - component: {fileID: 4482054414610262002}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8357192089627786592}
   - component: {fileID: 8357192089627786595}
   - component: {fileID: 8357192089627786594}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -161,7 +161,8 @@ GameObject:
   - component: {fileID: 8357192089973192350}
   - component: {fileID: 8357192089973192351}
   - component: {fileID: 7303673442093422653}
-  m_Layer: 0
+  - component: {fileID: 2836733834856873016}
+  m_Layer: 1
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -302,6 +303,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
+--- !u!114 &2836733834856873016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357192089973192345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ef3e18b109ac542bfb05951dc285cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 0}
+  Camera: {fileID: 0}
 --- !u!1 &8357192090143526831
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8357192090143526829}
   - component: {fileID: 8357192090143526828}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

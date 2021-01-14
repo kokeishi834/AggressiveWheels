@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 3298607878600019185}
   - component: {fileID: 9201779988011167705}
   - component: {fileID: 9201779988011167700}
+  - component: {fileID: 2129159326303871729}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -189,3 +190,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
+--- !u!114 &2129159326303871729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201779988011167706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ef3e18b109ac542bfb05951dc285cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 0}
+  Camera: {fileID: 0}
