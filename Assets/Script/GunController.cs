@@ -7,6 +7,7 @@ using HandleC;
 public class GunController : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
+    public int player_num = 0;
     HC HANDLE_INPUT = new HC();
 
     public int damage = 10;
@@ -26,10 +27,10 @@ public class GunController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        HANDLE_INPUT.UpdateJoyPad();
+        HANDLE_INPUT.UpdateJoyPad(player_num);
 
         //Xキーで発射
-        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(HC.Buttons.ShiftDown) || HANDLE_INPUT.Button(HC.Buttons.ShiftUp))
+        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(HC.Buttons.ShiftDown,player_num) || HANDLE_INPUT.Button(HC.Buttons.ShiftUp,player_num))
         {
             if (shot_late % late == 0)
             {

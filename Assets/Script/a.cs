@@ -9,7 +9,7 @@ public class a : MonoBehaviour
     //public Image scoop;//ロックオンマーカー
 
     public GameObject gun = null;//銃
-    public Transform Camera = null;//カメラ
+    public Transform player_camera = null;//カメラ
     int layerMask;
 
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class a : MonoBehaviour
     {
         layerMask = 1 << 11;//障害物のレイヤーを作って、1 << その番号 にする
         gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
-        Camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
+        player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
     }
 
     // Update is called once per frame
@@ -27,9 +27,9 @@ public class a : MonoBehaviour
         {
             gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         }
-        if(Camera == null)
+        if(player_camera == null)
         {
-            Camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
+            player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
         }
     }
 
@@ -49,19 +49,20 @@ public class a : MonoBehaviour
     {
         //scoop.GetComponent<Image>().sprite = Resources.Load<Sprite>("rook");
 
-        if (Physics.Linecast(transform.position, Camera.position, layerMask))
+        if(Camera.current.tag == "PlayerCamera")
         {
-            Debug.Log("blocked");
-            //scoop.GetComponent<Image>().sprite = Resources.Load<Sprite>("none_null");
-        }
-        else
-        {
-            if(Camera.tag == "PlayerCamera")
+            if (Physics.Linecast(transform.position, player_camera.position, layerMask))
+            {
+                Debug.Log("blocked");
+                //scoop.GetComponent<Image>().sprite = Resources.Load<Sprite>("none_null");
+            }
+            else
             {
                 Debug.Log("lock");
                 gun.transform.LookAt(transform);
             }
         }
-        
+
+        //Debug.Log(Camera.current.name);
     }
 }
