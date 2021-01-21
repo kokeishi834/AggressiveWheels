@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 public class SelectManager : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class SelectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //一番左にフォーカスさせる
+        EventSystem.current.SetSelectedGameObject(car_list[0]);
         //パーツの選択ボタンを非表示にする
-        for(int i = 0; i < parts_list.Count;i++)
+        for (int i = 0; i < parts_list.Count;i++)
         {
             parts_list[i].SetActive(false);
         }
@@ -38,7 +41,8 @@ public class SelectManager : MonoBehaviour
         {
             parts_list[i].SetActive(true);
         }
-
+        //一番左ににフォーカスさせる
+        EventSystem.current.SetSelectedGameObject(parts_list[0]);
         //戻るボタンを出現させる
         back_button.SetActive(true);
 
@@ -79,6 +83,8 @@ public class SelectManager : MonoBehaviour
         {
             car_list[i].SetActive(true);
         }
+        //一番左にフォーカスさせる
+        EventSystem.current.SetSelectedGameObject(car_list[0]);
 
         //戻るボタンを非表示にする
         back_button.SetActive(false);

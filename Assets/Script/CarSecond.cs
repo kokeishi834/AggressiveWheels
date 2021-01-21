@@ -73,73 +73,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
         //{
         //    return;
         //}
-
-
-        //アクセル&ブレーキの処理
-        {
-            if (Input.GetKey(KeyCode.UpArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f*/)
-            {
-                if ((HANDLE_INPUT.Button(HC.Buttons.A,player_num) ||
-                   HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
-                   HANDLE_INPUT.Button(HC.Buttons.C, player_num) ||
-                   Input.GetKey(KeyCode.W))
-                   && energy >= 0.0f)
-                {
-                    if (speed <= max_speed * 1.3f)
-                    {
-                        speed += accelerator * 2.0f;
-                        if (speed >= max_speed * 1.3f)
-                        {
-                            speed = max_speed * 1.3f;
-                        }
-                    }
-                    energy -= 0.1f;
-                }
-                else if (speed >= max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/)
-                {
-                    speed -= 0.5f;
-                    if (speed <= max_speed /* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/ + 0.5f)
-                        speed = max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/;
-                }
-                else
-                {
-                    speed += accelerator;
-                }
-
-                if (rb.velocity.magnitude < max_speed)
-                    rb.AddForce(new Vector3(transform.forward.x * 100.0f, 0.0f, transform.forward.z * 100.0f), ForceMode.Acceleration);
-
-                //rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
-            }
-            else if (Input.GetKey(KeyCode.DownArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.brake,player_num) > 0.1f*/)
-            {
-                speed -= 2.0f;
-                if (speed <= -25.0f)
-                {
-                    speed = -25.0f;
-                }
-                rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
-            }
-            else
-            {
-                if (speed > 0.0f)
-                {
-                    speed -= 1.0f;
-                }
-                else if (speed < 0.0f)
-                {
-                    speed += 1.0f;
-                }
-
-                if (speed <= 0.5f && speed >= -0.5f)
-                {
-                    speed = 0.0f;
-                }
-            }
-
-            speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
-            speed_num.GetComponent<Text>().text = ((int)rb.velocity.magnitude).ToString();
-        }
         //ハンドル制御
         {
             last_velocity = rb.velocity;
@@ -187,8 +120,67 @@ public class CarSecond : MonoBehaviourPunCallbacks
                 }
                 car_model.transform.localPosition = new Vector3(0.0f, handle_N * 0.3f, 0.0f);
             }
+        }
 
-            rb.velocity = new Vector3(transform.forward.x * rb.velocity.magnitude, rb.velocity.y, transform.forward.z * rb.velocity.magnitude);
+        //アクセル&ブレーキの処理
+        {
+            if (Input.GetKey(KeyCode.UpArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f*/)
+            {
+                if ((HANDLE_INPUT.Button(HC.Buttons.A,player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C, player_num) ||
+                   Input.GetKey(KeyCode.W))
+                   && energy >= 0.0f)
+                {
+                    if (speed <= max_speed * 1.3f)
+                    {
+                        speed += accelerator * 2.0f;
+                        if (speed >= max_speed * 1.3f)
+                        {
+                            speed = max_speed * 1.3f;
+                        }
+                    }
+                    energy -= 0.1f;
+                }
+                else if (speed >= max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/)
+                {
+                    speed -= 0.5f;
+                    if (speed <= max_speed /* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/ + 0.5f)
+                        speed = max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/;
+                }
+                else
+                {
+                    speed += accelerator;
+                }
+            }
+            else if (Input.GetKey(KeyCode.DownArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.brake,player_num) > 0.1f*/)
+            {
+                speed -= 2.0f;
+                if (speed <= -25.0f)
+                {
+                    speed = -25.0f;
+                }
+            }
+            else
+            {
+                if (speed > 0.0f)
+                {
+                    speed -= 1.0f;
+                }
+                else if (speed < 0.0f)
+                {
+                    speed += 1.0f;
+                }
+
+                if (speed <= 0.5f && speed >= -0.5f)
+                {
+                    speed = 0.0f;
+                }
+            }
+
+            speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
+            speed_num.GetComponent<Text>().text = ((int)speed).ToString();
+            rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
         }
 
         if (Input.GetKey(KeyCode.P))
