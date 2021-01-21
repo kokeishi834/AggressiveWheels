@@ -11,7 +11,7 @@ public class NavMeshTest : MonoBehaviour
     public int goal = 0;             //目的地の番号
     public float agent_range = 0.5f; //プレイヤーの半径
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         //目的地を設定してあげる
         agent.SetDestination(target[goal].transform.position);

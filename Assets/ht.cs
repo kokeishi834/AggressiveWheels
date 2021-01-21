@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using HandleC;
 
-public class test_handle : MonoBehaviour
+public class ht : MonoBehaviour
 {
+    public int player = 0;
     HC handle;
     // Start is called before the first frame update
     void Start()
@@ -16,10 +17,8 @@ public class test_handle : MonoBehaviour
     void Update()
     {
         handle.UpdateJoyPad();
-        Debug.Log("1P = " + handle.LimitHandle(0));
-        Debug.Log("2P = " + handle.LimitHandle(1));
-        if (handle.KeepButton(HC.Buttons.X, 0)) { Debug.Log("1P = X"); }
-
-        if (handle.KeepButton(HC.Buttons.X, 1)) { Debug.Log("2P = X"); }
+        this.gameObject.transform.position = new Vector3(handle.LimitHandle(player) * 5,0,0);
+        Debug.Log((player+1)+"P = " + handle.LimitHandle(player));
+        if (handle.KeepButton(HC.Buttons.X, player)) { Debug.Log((player+1)+"P = X"); }
     }
 }

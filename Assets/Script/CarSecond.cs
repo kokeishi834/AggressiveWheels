@@ -76,11 +76,11 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
         //アクセル&ブレーキの処理
         {
-            if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
+            if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator,0) > 0.1f)
             {
-                if ((HANDLE_INPUT.Button(HC.Buttons.A) ||
-                   HANDLE_INPUT.Button(HC.Buttons.B) ||
-                   HANDLE_INPUT.Button(HC.Buttons.C) ||
+                if ((HANDLE_INPUT.Button(HC.Buttons.A,0) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B,0) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C,0) ||
                    Input.GetKey(KeyCode.W))
                    && energy >= 0.0f)
                 {
@@ -127,7 +127,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
                 rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
             }
-            else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
+            else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake,0) > 0.1f)
             {
                 speed -= 2.0f;
                 if (speed <= -25.0f)
@@ -161,7 +161,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             last_velocity = rb.velocity;
             if (speed >= 0.0f)
             {
-                handle = HANDLE_INPUT.LimitHandle();
+                handle = HANDLE_INPUT.LimitHandle(0);
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     handle = -0.5f;
@@ -174,7 +174,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             }
             else if (speed < -0.1f)
             {
-                handle = -HANDLE_INPUT.LimitHandle();
+                handle = -HANDLE_INPUT.LimitHandle(0);
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     handle = 0.5f;

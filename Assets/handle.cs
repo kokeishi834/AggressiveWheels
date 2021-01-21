@@ -19,27 +19,26 @@ public class handle : MonoBehaviour
         // 入力状態を取得
         handle.UpdateJoyPad();
 
-        handle.LimitHandle();
-        Debug.Log(handle.LimitHandle());
-        handle.Pedal(HC.Pedals.accelerator);
-        Debug.Log(handle.Pedal(HC.Pedals.accelerator));
-        handle.Pedal(HC.Pedals.brake);
-        Debug.Log(handle.Pedal(HC.Pedals.brake));
-        if (handle.ButtonDown(HC.Buttons.A)) { Debug.Log("A"); }
+        handle.LimitHandle(0);
+        Debug.Log(handle.LimitHandle(0));
+        handle.Pedal(HC.Pedals.accelerator,0);
+        Debug.Log(handle.Pedal(HC.Pedals.accelerator,0));
+        handle.Pedal(HC.Pedals.brake,0);
+        Debug.Log(handle.Pedal(HC.Pedals.brake,0));
 
-        if (handle.Button(HC.Buttons.B)) { Debug.Log("B"); }
+        if (handle.Button(HC.Buttons.B,0)) { Debug.Log("B"); }
 
-        if (handle.KeepButton(HC.Buttons.C)) { Debug.Log("C"); }
+        if (handle.KeepButton(HC.Buttons.C,0)) { Debug.Log("C"); }
 
-        if (handle.KeepButton(HC.Buttons.X)) { Debug.Log("X"); }
+        if (handle.KeepButton(HC.Buttons.X,0)) { Debug.Log("X"); }
 
-        if (handle.KeepButton(HC.Buttons.Y)) { Debug.Log("Y"); }
+        if (handle.KeepButton(HC.Buttons.Y,0)) { Debug.Log("Y"); }
 
-        if (handle.KeepButton(HC.Buttons.Z)) { Debug.Log("Z"); }
+        if (handle.KeepButton(HC.Buttons.Z,0)) { Debug.Log("Z"); }
 
-        if (handle.KeepButton(HC.Buttons.ShiftDown)) { Debug.Log("ShiftDown"); }
+        if (handle.KeepButton(HC.Buttons.ShiftDown,0)) { Debug.Log("ShiftDown"); }
 
-        if (handle.KeepButton(HC.Buttons.ShiftUp)) { Debug.Log("ShiftUp"); }
+        if (handle.KeepButton(HC.Buttons.ShiftUp,0)) { Debug.Log("ShiftUp"); }
 
 
 

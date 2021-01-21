@@ -29,7 +29,7 @@ public class GunController : MonoBehaviourPunCallbacks
         HANDLE_INPUT.UpdateJoyPad();
 
         //Xキーで発射
-        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(HC.Buttons.ShiftDown) || HANDLE_INPUT.Button(HC.Buttons.ShiftUp))
+        if (Input.GetKey(KeyCode.X) || HANDLE_INPUT.Button(HC.Buttons.ShiftDown,0) || HANDLE_INPUT.Button(HC.Buttons.ShiftUp,0))
         {
             if (shot_late % late == 0)
             {
