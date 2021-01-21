@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class CarSecond : MonoBehaviourPunCallbacks
 {
+    public int player_num;
     public Vector3 Gravity;
     int gun_num = -1;
     public GameObject[] gun;
@@ -66,7 +67,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        HANDLE_INPUT.UpdateJoyPad();
+        HANDLE_INPUT.UpdateJoyPad(player_num);
 
         //if (!this.GetComponent<PhotonView>().IsMine)
         //{
@@ -76,11 +77,11 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
         //アクセル&ブレーキの処理
         {
-            if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f)
+            if (Input.GetKey(KeyCode.UpArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f*/)
             {
-                if ((HANDLE_INPUT.Button(HC.Buttons.A) ||
-                   HANDLE_INPUT.Button(HC.Buttons.B) ||
-                   HANDLE_INPUT.Button(HC.Buttons.C) ||
+                if ((HANDLE_INPUT.Button(HC.Buttons.A,player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C, player_num) ||
                    Input.GetKey(KeyCode.W))
                    && energy >= 0.0f)
                 {
@@ -94,40 +95,23 @@ public class CarSecond : MonoBehaviourPunCallbacks
                     }
                     energy -= 0.1f;
                 }
-                else if (speed >= max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator)*/)
+                else if (speed >= max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/)
                 {
                     speed -= 0.5f;
-                    if (speed <= max_speed /** HANDLE_INPUT.Pedal(HC.Pedals.accelerator)*/ + 0.5f)
-                        speed = max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator)*/;
+                    if (speed <= max_speed /* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/ + 0.5f)
+                        speed = max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/;
                 }
                 else
                 {
                     speed += accelerator;
                 }
 
-                //if (HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
-                //{
-                //    drift = true;
-                //    if (handle < 0)
-                //    {
-                //        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + -60.0f, 0.0f));
-                //    }
-                //    if (handle > 0)
-                //    {
-                //        car_model.transform.Rotate(new Vector3(0.0f, handle * 15.0f + 60.0f, 0.0f));
-                //    }
+                if (rb.velocity.magnitude < max_speed)
+                    rb.AddForce(new Vector3(transform.forward.x * 100.0f, 0.0f, transform.forward.z * 100.0f), ForceMode.Acceleration);
 
-                //    rb.velocity = last_velocity + car_model.transform.forward.normalized;
-                //    rb.velocity.Normalize();
-                //}
-                //else
-                //{
-                //    drift = false;
-                //}
-
-                rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
+                //rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
             }
-            else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake) > 0.1f)
+            else if (Input.GetKey(KeyCode.DownArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.brake,player_num) > 0.1f*/)
             {
                 speed -= 2.0f;
                 if (speed <= -25.0f)
@@ -154,14 +138,14 @@ public class CarSecond : MonoBehaviourPunCallbacks
             }
 
             speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
-            speed_num.GetComponent<Text>().text = ((int)speed).ToString();
+            speed_num.GetComponent<Text>().text = ((int)rb.velocity.magnitude).ToString();
         }
         //ハンドル制御
         {
             last_velocity = rb.velocity;
             if (speed >= 0.0f)
             {
-                handle = HANDLE_INPUT.LimitHandle();
+                handle = HANDLE_INPUT.LimitHandle(player_num);
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     handle = -0.5f;
@@ -174,7 +158,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             }
             else if (speed < -0.1f)
             {
-                handle = -HANDLE_INPUT.LimitHandle();
+                handle = -HANDLE_INPUT.LimitHandle(player_num);
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     handle = 0.5f;
@@ -201,15 +185,16 @@ public class CarSecond : MonoBehaviourPunCallbacks
                 {
                     handle_N = handle;
                 }
-                rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
                 car_model.transform.localPosition = new Vector3(0.0f, handle_N * 0.3f, 0.0f);
             }
+
+            rb.velocity = new Vector3(transform.forward.x * rb.velocity.magnitude, rb.velocity.y, transform.forward.z * rb.velocity.magnitude);
         }
 
         if (Input.GetKey(KeyCode.P))
         {
             energy += 0.1f;
-            if(energy >= max_energy)
+            if (energy >= max_energy)
             {
                 energy = max_energy;
             }
@@ -258,8 +243,14 @@ public class CarSecond : MonoBehaviourPunCallbacks
         gun_num = num;
 
         GameObject.Instantiate(gun[gun_num]);//, transform.GetChild(1).gameObject.transform);
-        
+
         //gun[gun_num].transform.parent = transform.GetChild(1).gameObject.transform;
-        
+
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + transform.rotation * new Vector3(0.0f, -1.0f, 0.0f), 0.1f);
     }
 }

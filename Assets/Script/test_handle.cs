@@ -17,8 +17,8 @@ public class test_handle : MonoBehaviour
     void Update()
     {
         // 入力状態を取得
-        handle.UpdateJoyPad();
+        handle.UpdateJoyPad(0);
 
-        this.transform.Translate(0.2f * handle.LimitHandle(), 0, 0);
+        this.transform.Translate(0.2f * handle.LimitHandle(0), 0, 0);
     }
 }

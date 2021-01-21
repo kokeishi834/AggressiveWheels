@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Goal
+  - GamePlayManager
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX
