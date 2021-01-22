@@ -124,7 +124,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
         //アクセル&ブレーキの処理
         {
-            if (Input.GetKey(KeyCode.UpArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.accelerator) > 0.1f*/)
+            if (Input.GetKey(KeyCode.UpArrow) || HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num) > 0.1f)
             {
                 if ((HANDLE_INPUT.Button(HC.Buttons.A,player_num) ||
                    HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
@@ -142,18 +142,18 @@ public class CarSecond : MonoBehaviourPunCallbacks
                     }
                     energy -= 0.1f;
                 }
-                else if (speed >= max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/)
+                else if (speed >= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator, player_num))
                 {
                     speed -= 0.5f;
-                    if (speed <= max_speed /* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/ + 0.5f)
-                        speed = max_speed/* * HANDLE_INPUT.Pedal(HC.Pedals.accelerator,player_num)*/;
+                    if (speed <= max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator, player_num) + 0.5f)
+                        speed = max_speed * HANDLE_INPUT.Pedal(HC.Pedals.accelerator, player_num);
                 }
                 else
                 {
                     speed += accelerator;
                 }
             }
-            else if (Input.GetKey(KeyCode.DownArrow)/* || HANDLE_INPUT.Pedal(HC.Pedals.brake,player_num) > 0.1f*/)
+            else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake, player_num) > 0.1f)
             {
                 speed -= 2.0f;
                 if (speed <= -25.0f)

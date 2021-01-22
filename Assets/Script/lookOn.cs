@@ -13,6 +13,9 @@ public class lookOn : MonoBehaviour
     private GameObject nearObj = null;         //最も近いオブジェクト
     private float searchTime = 0;              //経過時間
     private GameObject parent;
+
+
+    public GameObject[] Guns = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,7 @@ public class lookOn : MonoBehaviour
         }
         //最も近かったオブジェクトを返す
         return targetObj;
+
     }
 
     void OnTriggerStay(Collider other)

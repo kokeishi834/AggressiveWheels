@@ -166,7 +166,7 @@ RectTransform:
   m_GameObject: {fileID: 167485784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9204, y: 1.9204, z: 1.9204}
+  m_LocalScale: {x: 2.4318025, y: 2.4318025, z: 2.4318025}
   m_Children: []
   m_Father: {fileID: 906769307}
   m_RootOrder: 2
@@ -467,15 +467,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5859109236542215184, guid: a7b6763132686424daa234c7e17847f3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -282
+      objectReference: {fileID: 0}
     - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
         type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
         type: 3}
       propertyPath: m_FontData.m_MaxSize
-      value: 50
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
         type: 3}
@@ -492,6 +497,22 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
+        type: 3}
+      propertyPath: m_Text
+      value: Push to any Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859109236542215185, guid: a7b6763132686424daa234c7e17847f3,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680,
+        type: 3}
     - target: {fileID: 5859109237003714229, guid: a7b6763132686424daa234c7e17847f3,
         type: 3}
       propertyPath: m_IsActive

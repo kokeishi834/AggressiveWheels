@@ -16,21 +16,21 @@ public class a : MonoBehaviour
     void Start()
     {
         layerMask = 1 << 11;//障害物のレイヤーを作って、1 << その番号 にする
-        gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
-        player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
+        //gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+        //player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gun == null)
-        {
-            gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
-        }
-        if(player_camera == null)
-        {
-            player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
-        }
+        //if(gun == null)
+        //{
+        //    gun = GameObject.FindWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+        //}
+        //if(player_camera == null)
+        //{
+        //    player_camera = GameObject.FindWithTag("Player").transform.GetChild(3).transform;
+        //}
     }
 
     // Disable the behaviour when it becomes invisible...

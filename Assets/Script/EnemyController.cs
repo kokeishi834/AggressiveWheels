@@ -5,18 +5,39 @@ using Photon.Pun;
 
 public class EnemyController : MonoBehaviourPunCallbacks
 {
-    public int hp = 50;
+
+    public int maxHp = 50;
+    int hp;
+    private Vector3 startPos;
+    bool deadObject;
     int point;//倒された時の得点
+    public void initialize()
+    {
+        this.gameObject.SetActive(true);
+        deadObject = false;
+        hp = maxHp;
+        point = 20;
+        transform.position = startPos;
+        gameObject.GetComponent<NavMeshTest>().Start();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        point = 20;
+        startPos = this.transform.position;
+        initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            DestroyObject();
+        }
+        if(deadObject)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     void DestroyObject()
@@ -24,7 +45,7 @@ public class EnemyController : MonoBehaviourPunCallbacks
         //爆発エフェクトの呼び出し
         GameObject burst_spark = GameObject.Find("eff_burst_spark");
         burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
-        Destroy(this.gameObject);
+        this.deadObject = true;        
     }
 
     //ダメージの関数、体力が０で消滅

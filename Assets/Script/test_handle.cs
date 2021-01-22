@@ -5,12 +5,11 @@ using HandleC;
 
 public class test_handle : MonoBehaviour
 {
+    HC handle;
     // Start is called before the first frame update
-    HC handle = new HC();
-
     void Start()
     {
-        
+        handle = new HC();
     }
 
     // Update is called once per frame

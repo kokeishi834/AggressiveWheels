@@ -17,6 +17,6 @@ public class BlinkingObject : MonoBehaviour
     {
         time++;
 
-        this.gameObject.GetComponent<Text>().color = new Color(1.0f,1.0f,1.0f, Mathf.Cos(time/10));
+        this.gameObject.GetComponent<Text>().color = new Color(1.0f,1.0f,1.0f, Mathf.Cos(time/20));
     }
 }
