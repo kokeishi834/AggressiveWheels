@@ -39,6 +39,9 @@ public class CarSecond : MonoBehaviourPunCallbacks
     GameObject energy_meter = null;
     GameObject speed_num = null;
 
+    public GameObject hp_display = null;
+    int invincible_time = 0;//衝突時の無敵時間、これがないと連続で判定されてしまう
+
     Vector3 last_velocity;
 
     bool drift;
@@ -202,7 +205,11 @@ public class CarSecond : MonoBehaviourPunCallbacks
             this.GetComponent<PointController>().DeathPoint();
             player_hp = max_hp;
         }
-
+        //無敵時間がある時
+        if(invincible_time > 0)
+        {
+            invincible_time--;
+        }
         //rb.AddForce(Gravity, ForceMode.Acceleration);
     }
 
@@ -211,10 +218,16 @@ public class CarSecond : MonoBehaviourPunCallbacks
     //エネミーと当たった時
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && invincible_time == 0)
         {
             //体力減少
             player_hp -= 20;
+            //HPバーの減少
+            float percentage = 1.0f - (float)(max_hp - 20) / max_hp;
+            hp_display.GetComponent<HPController>().Damage(
+                percentage);
+            //無敵時間の設定
+            invincible_time = 60;
             //爆発エフェクトの呼び出し
             GameObject burst_spark = GameObject.Find("eff_burst_spark");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
@@ -227,6 +240,11 @@ public class CarSecond : MonoBehaviourPunCallbacks
         {
             //体力減少
             player_hp -= damage;
+
+            //HPバーの減少
+            float percentage = 1.0f - (float)(max_hp - damage) / max_hp;
+            hp_display.GetComponent<HPController>().Damage(
+                percentage);
         }
     }
 
