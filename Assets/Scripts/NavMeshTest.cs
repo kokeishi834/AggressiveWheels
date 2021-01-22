@@ -14,7 +14,7 @@ public class NavMeshTest : MonoBehaviour
     
     float distance;                  //目的地までの距離
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         //目的地を設定してあげる
         agent.SetDestination(target[goal].transform.position);

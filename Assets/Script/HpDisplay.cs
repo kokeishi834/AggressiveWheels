@@ -22,6 +22,6 @@ public class HpDisplay : MonoBehaviourPunCallbacks
         string hp_string = player.GetComponent<CarSecond>().player_hp.ToString();//object_point.ToString();
         //Debug.Log("HP" + hp_string);
         // テキストの表示を入れ替える
-        hp_text.text = "HP・・・" + hp_string;
+        hp_text.text = hp_string;
     }
 }
