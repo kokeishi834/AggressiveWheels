@@ -18,10 +18,11 @@ public class HPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Damage(0.1f);
-        }
+        //デバッグ用にバーを減らす処理
+        //if(Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Damage(0.1f);
+        //}
         //HPが0の時にそれ以上減らないようにする
         if(HP.GetComponent<Image>().fillAmount < 0)
         {
