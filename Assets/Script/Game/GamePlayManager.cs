@@ -14,6 +14,8 @@ public class GamePlayManager : MonoBehaviour
     //public GameObject text;
     //GameObject Canvas;
     [SerializeField] GameObject goal = null;
+
+    public GameObject arrival_pos;
      // Start is called before the first frame update
     void Start()
     { 
@@ -26,7 +28,12 @@ public class GamePlayManager : MonoBehaviour
     {
         count++;
 
-        if(Input.GetKeyDown(KeyCode.O))
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            goal.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
         {
             KillEnemy();
         }
@@ -49,7 +56,7 @@ public class GamePlayManager : MonoBehaviour
     //SelectSceneからプレイヤーとパーツの選択情報をintで貰う関数
     public void SetPlayerInfo(int car_num, int parts_num)
     {
-        GameObject.Instantiate(obj[car_num], new Vector3(0, 2.0f, 0), Quaternion.identity);
+        GameObject.Instantiate(obj[car_num], arrival_pos.transform.position, Quaternion.identity);
         obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
         //Debug.Log("c" + car_num);
         //Debug.Log("p" + parts_num);

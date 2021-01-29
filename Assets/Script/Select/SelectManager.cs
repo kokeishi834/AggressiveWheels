@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using HandleC;
+using UnityEngine.UI;
+
 public class SelectManager : MonoBehaviour
 {
     public List<GameObject> car_list;
@@ -11,6 +14,11 @@ public class SelectManager : MonoBehaviour
     public GameObject select_text = null;
     int car_num = -1;
     int parts_num = -1;
+
+    HC[] HANDLE_INPUT = {new HC(), new HC()};
+
+    public string to_scene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +36,52 @@ public class SelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i = 0; i < 2; i++)
+        {
+            HANDLE_INPUT[i].UpdateJoyPad(i);
+
+            if(back_button.activeSelf == false)
+            {
+                if(HANDLE_INPUT[i].Button(HC.Buttons.A,i))
+                {
+                    car_list[0].GetComponent<Button>().Select();
+                    car_list[0].GetComponent<CarButtonController>().Click();
+                }
+                if (HANDLE_INPUT[i].Button(HC.Buttons.B, i))
+                {
+                    car_list[1].GetComponent<Button>().Select();
+                    car_list[1].GetComponent<CarButtonController>().Click();
+                }
+                if (HANDLE_INPUT[i].Button(HC.Buttons.C, i))
+                {
+                    car_list[2].GetComponent<Button>().Select();
+                    car_list[2].GetComponent<CarButtonController>().Click();
+                }
+            }
+            else
+            {
+                if (HANDLE_INPUT[i].Button(HC.Buttons.X, i))
+                {
+                    parts_list[0].GetComponent<Button>().Select();
+                    parts_list[0].GetComponent<PartsButtonController>().Click();
+                }
+                if (HANDLE_INPUT[i].Button(HC.Buttons.Y, i))
+                {
+                    parts_list[1].GetComponent<Button>().Select();
+                    parts_list[1].GetComponent<PartsButtonController>().Click();
+                }
+                if (HANDLE_INPUT[i].Button(HC.Buttons.Z, i))
+                {
+                    parts_list[2].GetComponent<Button>().Select();
+                    parts_list[2].GetComponent<PartsButtonController>().Click();
+                }
+                if (HANDLE_INPUT[i].Button(HC.Buttons.A, i))
+                {
+                    back_button.GetComponent<Button>().Select();
+                    back_button.GetComponent<BackButtonController>().Click();
+                }
+            }
+        }
     }
 
     public void GetCarNum(int num)
@@ -66,7 +119,7 @@ public class SelectManager : MonoBehaviour
         SceneManager.sceneLoaded += GameSceneLoaded;
 
         //SceneManager.LoadScene("GameScene");
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene(to_scene);
     }
 
     //戻るボタンが押された時の処理
@@ -101,10 +154,10 @@ public class SelectManager : MonoBehaviour
     {
 
         // シーン切り替え後のスクリプトを取得
-        var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
+        var gameManager = GameObject.FindWithTag("SelectManager").GetComponent<buttonfunction>();
         
         // データを渡す処理
-        gameManager.SetPlayerInfo(car_num,parts_num);
+        gameManager.SetCustomNum(car_num,parts_num);
 
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;

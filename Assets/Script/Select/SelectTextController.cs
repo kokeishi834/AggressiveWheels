@@ -20,7 +20,7 @@ public class SelectTextController : MonoBehaviour
 
     public void SetPartsText()
     {
-        gameObject.transform.position -= new Vector3(0, 300, 0);
+        //gameObject.transform.position -= new Vector3(0, 300, 0);
 
         Text select_text = gameObject.GetComponent<Text>();
         // テキストの表示を入れ替える
@@ -30,7 +30,7 @@ public class SelectTextController : MonoBehaviour
 
     public void SetCarText()
     {
-        gameObject.transform.position += new Vector3(0, 300, 0);
+        //gameObject.transform.position += new Vector3(0, 300, 0);
         Text select_text = gameObject.GetComponent<Text>();
         // テキストの表示を入れ替える
         select_text.text = "クルマを選択してください";
