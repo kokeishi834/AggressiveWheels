@@ -29,7 +29,7 @@ public class CollisionController : MonoBehaviour
         if (owner.tag == "Player" && (other.tag == "Enemy"))// || other.tag == "Player2"))
         {
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_red");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
             //弾を消す
             Destroy(gameObject);
@@ -40,48 +40,13 @@ public class CollisionController : MonoBehaviour
         if (owner.tag == "Enemy" && other.tag == "Player")// || other.tag == "Player2"))
         {
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
             //弾を消す
             Destroy(gameObject);
             //Playerにダメージを与える
             other.GetComponent<CarSecond>().PlayerDamage(power, owner);
         }
-
-        //else if (owner.tag == "Player2" && (other.tag == "Enemy" || other.tag == "Player1"))
-        //{
-        //    //爆発エフェクトの呼び出し
-        //    GameObject burst_spark = GameObject.Find("eff_burst_spark");
-        //    burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
-        //    //弾を消す
-        //    Destroy(gameObject);
-        //    //敵にダメージを与える
-        //    if (other.tag == "Player1")
-        //    {
-        //        Debug.Log("Player1 Hit");
-        //    }
-        //    else
-        //    {
-        //        other.GetComponent<EnemyController>().Damage(power, owner);
-        //    }
-        //}
-        //else if (owner.tag == "Enemy" && (other.tag == "Player2" || other.tag == "Player1"))
-        //{
-        //    //爆発エフェクトの呼び出し
-        //    GameObject burst_spark = GameObject.Find("eff_burst_spark");
-        //    burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
-        //    //弾を消す
-        //    Destroy(gameObject);
-        //    //敵にダメージを与える
-        //    if (other.tag == "Player1")
-        //    {
-        //        Debug.Log("Player1 Hit");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Player2 Hit");
-        //    }
-        //}
     }
 
     private void OnCollisionEnter(Collision other)
@@ -89,7 +54,7 @@ public class CollisionController : MonoBehaviour
         if (owner.tag == "Player" && other.collider.tag == "Enemy")// || other.tag == "Player2"))
         {
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_red");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
             //弾を消す
             Destroy(gameObject);
@@ -100,7 +65,7 @@ public class CollisionController : MonoBehaviour
         if (owner.tag == "Enemy" && other.collider.tag == "Player")// || other.tag == "Player2"))
         {
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
             //弾を消す
             Destroy(gameObject);

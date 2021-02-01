@@ -254,3 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 180
   power: 20
+  red_effect: {fileID: 126067819387217943, guid: 14c2bfd2fb80f604f92c5398856ed6f2,
+    type: 3}
+  blue_effect: {fileID: 2953106336715888100, guid: cf53a9b07f2ff5a408ab8344eb326693,
+    type: 3}

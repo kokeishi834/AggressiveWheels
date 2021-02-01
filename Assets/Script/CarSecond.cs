@@ -216,7 +216,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             //体力減少
             player_hp -= 20;
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
         }
     }

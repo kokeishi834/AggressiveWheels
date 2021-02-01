@@ -499,6 +499,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4337265115431385729, guid: 45779d489c9c73a4fb53db259a4330dd,
         type: 3}
+      propertyPath: parts_num.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337265115431385729, guid: 45779d489c9c73a4fb53db259a4330dd,
+        type: 3}
       propertyPath: car_list.Array.data[0]
       value: 
       objectReference: {fileID: 1557216135}
