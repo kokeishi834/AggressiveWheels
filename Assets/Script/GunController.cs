@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using HandleC;
 
-public class GunController : MonoBehaviourPunCallbacks
+public class GunController : MonoBehaviour
 {
     // Start is called before the first frame update
     public int player_num = 0;

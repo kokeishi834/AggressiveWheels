@@ -575,6 +575,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResultCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4589198131804355732, guid: fd4ee204fa88a6b44b162805e23795b4,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589198131955579223, guid: fd4ee204fa88a6b44b162805e23795b4,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: e7ed68ffa25e09543bec722c1b50bd14,
+        type: 3}
+    - target: {fileID: 4589198131955579223, guid: fd4ee204fa88a6b44b162805e23795b4,
+        type: 3}
+      propertyPath: m_Text
+      value: GAME CLEAR!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589198131955579223, guid: fd4ee204fa88a6b44b162805e23795b4,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 170
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4ee204fa88a6b44b162805e23795b4, type: 3}
 --- !u!224 &4589198132228319480 stripped

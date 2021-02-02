@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 using HandleC;
 using UnityEngine.UI;
 
-public class CarSecond : MonoBehaviourPunCallbacks
+public class CarSecond : MonoBehaviour
 {
     public int player_num;
     public Vector3 Gravity;
@@ -40,8 +38,9 @@ public class CarSecond : MonoBehaviourPunCallbacks
     GameObject speed_num = null;
 
     Vector3 last_velocity;
+    int invincible_time = 0;//無敵時間
 
-    bool drift;
+    bool drift = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +60,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
         //仮設置移行予定
         max_hp = player_hp;
-        drift = false;
     }
 
     // Update is called once per frame
@@ -203,6 +201,10 @@ public class CarSecond : MonoBehaviourPunCallbacks
             player_hp = max_hp;
         }
 
+        if(invincible_time > 0)
+        {
+            invincible_time--;
+        }
         //rb.AddForce(Gravity, ForceMode.Acceleration);
     }
 
@@ -211,10 +213,15 @@ public class CarSecond : MonoBehaviourPunCallbacks
     //エネミーと当たった時
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && invincible_time <= 0)
         {
+            int damage = 20;
             //体力減少
-            player_hp -= 20;
+            player_hp -= damage;
+            GameObject hp_controller = GameObject.Find("HP");
+            float damage_percentage = (float)damage / max_hp;
+            invincible_time = 20;
+            hp_controller.GetComponent<HPController>().Damage(damage_percentage);
             //爆発エフェクトの呼び出し
             GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
@@ -223,10 +230,14 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
     public void PlayerDamage(int damage, GameObject owner)
     {
-        if (owner.gameObject.tag == "Enemy")
+        if (owner.gameObject.tag == "Enemy" && invincible_time <= 0)
         {
             //体力減少
             player_hp -= damage;
+            GameObject hp_controller = GameObject.Find("HP");
+            float damage_percentage = (float)damage / max_hp;
+            invincible_time = 20;
+            hp_controller.GetComponent<HPController>().Damage(damage_percentage);
         }
     }
 

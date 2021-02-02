@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HandleC;
 using UnityEngine.SceneManagement;
 public class buttonfunction : MonoBehaviour
 {
     // Start is called before the first frame update
     int car_num;
     int parts_num;
+
+    HC HANDLE_INPUT = new HC();
     void Start()
     {
         
@@ -16,7 +19,22 @@ public class buttonfunction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HANDLE_INPUT.UpdateJoyPad(0);
+        if (HANDLE_INPUT.Button(HC.Buttons.A, 0))
+        {
+            //stage_list[0].GetComponent<Button>().Select();
+            StringArgFunction("MakeStage1");
+        }
+        if (HANDLE_INPUT.Button(HC.Buttons.B, 0))
+        {
+            //car_list[1].GetComponent<Button>().Select();
+            StringArgFunction("MakeStage2");
+        }
+        if (HANDLE_INPUT.Button(HC.Buttons.C, 0))
+        {
+            //car_list[2].GetComponent<Button>().Select();
+            StringArgFunction("MakeStage3");
+        }
     }
 
     public void StringArgFunction(string s)

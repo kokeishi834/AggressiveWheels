@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 using HandleC;
 
-public class TitleController : MonoBehaviourPunCallbacks
+public class TitleController : MonoBehaviour
 {
     // Start is called before the first frame update
     HC[] HANDLE_INPUT = {new HC(),new HC()};

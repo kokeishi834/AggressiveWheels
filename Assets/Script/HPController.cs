@@ -22,10 +22,10 @@ public class HPController : MonoBehaviour
         {
             Damage(0.1f);
         }
-        //HPが0の時にそれ以上減らないようにする
+        //HPが0の時にそれ以上減らないようにして復活する
         if(HP.GetComponent<Image>().fillAmount < 0)
         {
-            HP.GetComponent<Image>().fillAmount = 0;
+            HP.GetComponent<Image>().fillAmount = 1.0f;
         }
         
         //ゲージの色を黄色に変更

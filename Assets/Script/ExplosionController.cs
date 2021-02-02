@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class ExplosionController : MonoBehaviourPunCallbacks
+public class ExplosionController : MonoBehaviour
 {
    public GameObject particle = null;
    public GameObject audiosource = null;

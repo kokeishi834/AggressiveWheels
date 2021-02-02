@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class CheakPointController : MonoBehaviourPunCallbacks
+public class CheakPointController : MonoBehaviour
 {
     int point;//チェックポイントの得点
     // Start is called before the first frame update

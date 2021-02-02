@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class PointController : MonoBehaviourPunCallbacks
+
+public class PointController : MonoBehaviour
 {
     public int now_point = 0;
     // Start is called before the first frame update

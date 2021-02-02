@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
-public class HpDisplay : MonoBehaviourPunCallbacks
+
+public class HpDisplay : MonoBehaviour
 {
     public GameObject player;
     public GameObject HP; // Textオブジェクト
