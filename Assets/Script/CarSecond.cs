@@ -229,7 +229,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             //無敵時間の設定
             invincible_time = 60;
             //爆発エフェクトの呼び出し
-            GameObject burst_spark = GameObject.Find("eff_burst_spark");
+            GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
         }
     }

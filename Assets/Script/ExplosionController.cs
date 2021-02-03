@@ -5,13 +5,13 @@ using Photon.Pun;
 
 public class ExplosionController : MonoBehaviourPunCallbacks
 {
-    GameObject particle;
-    GameObject audiosource;
+   public GameObject particle = null;
+   public GameObject audiosource = null;
     // Start is called before the first frame update
     void Start()
     {
-        particle = GameObject.Find("eff_burst_spark");
-        audiosource = GameObject.Find("Audio");
+        
+        //audiosource = GameObject.Find("Audio");
     }
 
     // Update is called once per frame
