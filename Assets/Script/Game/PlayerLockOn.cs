@@ -6,6 +6,8 @@ public class PlayerLockOn : MonoBehaviour
 {
     GameObject pearents;
     public GameObject[] Guns = null;
+
+    bool look_enemy = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,11 +17,19 @@ public class PlayerLockOn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!look_enemy)
+        {
+            foreach (GameObject obj in Guns)
+            {
+                obj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+        look_enemy = false;
     }
 
     void OnTriggerStay(Collider other)
     {
+        look_enemy = true;
         if(other.tag == "Enemy")
         {
             GameObject near_object = serchTag(pearents,"Enemy");
@@ -28,7 +38,6 @@ public class PlayerLockOn : MonoBehaviour
                 obj.transform.LookAt(near_object.transform);
             }
         }
-
     }
 
     void OnTriggerExit(Collider other)

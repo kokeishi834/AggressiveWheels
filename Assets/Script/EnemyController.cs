@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class EnemyController : MonoBehaviourPunCallbacks
+public class EnemyController : MonoBehaviour
 {
 
     public int maxHp = 50;
     int hp;
-    private Vector3 startPos;
+    Vector3 startPos;
     bool deadObject;
     int point;//倒された時の得点
     public void initialize()
@@ -43,7 +42,7 @@ public class EnemyController : MonoBehaviourPunCallbacks
     void DestroyObject()
     {
         //爆発エフェクトの呼び出し
-        GameObject burst_spark = GameObject.Find("eff_burst_spark");
+        GameObject burst_spark = GameObject.Find("eff_burst_spark_death");
         burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
         this.deadObject = true;        
     }

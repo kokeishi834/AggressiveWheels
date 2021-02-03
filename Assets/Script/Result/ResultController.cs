@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Photon.Pun;
-public class ResultController : MonoBehaviourPunCallbacks
+public class ResultController : MonoBehaviour
 {
     int result_score = 0;
     int time = 0;

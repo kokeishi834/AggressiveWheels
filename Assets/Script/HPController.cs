@@ -18,15 +18,14 @@ public class HPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //デバッグ用にバーを減らす処理
-        //if(Input.GetKeyDown(KeyCode.A))
-        //{
-        //    Damage(0.1f);
-        //}
-        //HPが0の時にそれ以上減らないようにする
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            Damage(0.1f);
+        }
+        //HPが0の時にそれ以上減らないようにして復活する
         if(HP.GetComponent<Image>().fillAmount < 0)
         {
-            HP.GetComponent<Image>().fillAmount = 0;
+            HP.GetComponent<Image>().fillAmount = 1.0f;
         }
         
         //ゲージの色を黄色に変更

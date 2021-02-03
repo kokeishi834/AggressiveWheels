@@ -10,9 +10,6 @@ public class GamePlayManager : MonoBehaviour
     int kill_enemy_num;//一人用で一時的に使う
     public int enemy_num = 0;//一人用で一時的に使う
     public GameObject[] obj = null;
-    //Canvas prefab;
-    //public GameObject text;
-    //GameObject Canvas;
     [SerializeField] GameObject goal = null;
 
     public GameObject arrival_pos;
@@ -27,7 +24,7 @@ public class GamePlayManager : MonoBehaviour
     void Update()
     {
         count++;
-
+        //デバッグ用
         if(Input.GetKeyDown(KeyCode.G))
         {
             goal.SetActive(true);
@@ -37,20 +34,7 @@ public class GamePlayManager : MonoBehaviour
         {
             KillEnemy();
         }
-        //if(/*count >= goal_appearance * 30*/ kill_enemy_num >= enemy_num)//指定の時間が経過したらゴールを出現させる,30fps
-        //{
-        //    goal.SetActive(true);
-        //}
-
-        //for (int i= 0; i < myList.Count; i++)
-        //{
-        //    int player_point = myList[i].GetComponent<PointController>().GetPoint();
-        //    //int をstringに変換する
-        //    string score = player_point.ToString();
-
-        //    // テキストの変更
-        //    //Canvas.GetComponent<PointDisplay>().SetObject("Player", player_point);
-        //}
+        
     }
 
     //SelectSceneからプレイヤーとパーツの選択情報をintで貰う関数

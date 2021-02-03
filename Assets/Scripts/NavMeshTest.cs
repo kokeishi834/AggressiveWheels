@@ -8,16 +8,17 @@ public class NavMeshTest : MonoBehaviour
     public NavMeshAgent agent;       //探索を行うオブジェクト   
     public GameObject[] target;      //目的地
     public float range = 0;          //到達判定の範囲
-    public int goal = 0;             //目的地の番号
+    public int start_goal = 0;             //目的地の番号
     public float agent_range = 0.5f; //プレイヤーの半径
+    int goal = 0;
 
-    
     float distance;                  //目的地までの距離
     // Start is called before the first frame update
     public void Start()
     {
+        goal = start_goal;
         //目的地を設定してあげる
-        agent.SetDestination(target[goal].transform.position);
+        agent.SetDestination(target[start_goal].transform.position);
 
         distance = Vector2.Distance(new Vector2(transform.position.x,
             transform.position.z),new Vector2(target[goal].transform.position.x,

@@ -17,6 +17,11 @@ public class SelectManager : MonoBehaviour
 
     HC[] HANDLE_INPUT = {new HC(), new HC()};
 
+    bool handle_trigger = false;
+    bool button_trigger = false;
+    int select_car = 0;
+    int select_parts = 0;
+
     public string to_scene;
 
     // Start is called before the first frame update
@@ -24,6 +29,7 @@ public class SelectManager : MonoBehaviour
     {
         //一番左にフォーカスさせる
         EventSystem.current.SetSelectedGameObject(car_list[0]);
+        select_car = 0;
         //パーツの選択ボタンを非表示にする
         for (int i = 0; i < parts_list.Count;i++)
         {
@@ -36,49 +42,121 @@ public class SelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 2; i++)
-        {
-            HANDLE_INPUT[i].UpdateJoyPad(i);
+        HANDLE_INPUT[0].UpdateJoyPad(0);
 
-            if(back_button.activeSelf == false)
+        if(button_trigger)
+        {
+            if (!HANDLE_INPUT[0].Button(HC.Buttons.A, 0) &&
+               !HANDLE_INPUT[0].Button(HC.Buttons.B, 0) &&
+               !HANDLE_INPUT[0].Button(HC.Buttons.C, 0) &&
+               !HANDLE_INPUT[0].Button(HC.Buttons.X, 0) &&
+               !HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) &&
+               !HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
             {
-                if(HANDLE_INPUT[i].Button(HC.Buttons.A,i))
+                button_trigger = false;
+            }
+        }
+        if (back_button.activeSelf == false)
+        {
+            if (!handle_trigger)
+            {
+                if (HANDLE_INPUT[0].LimitHandle(0) > 0.5f)
                 {
-                    car_list[0].GetComponent<Button>().Select();
-                    car_list[0].GetComponent<CarButtonController>().Click();
+                    select_car = (select_car + 1) % car_list.Count;
+                    handle_trigger = true;
                 }
-                if (HANDLE_INPUT[i].Button(HC.Buttons.B, i))
+                else if (HANDLE_INPUT[0].LimitHandle(0) < -0.5f)
                 {
-                    car_list[1].GetComponent<Button>().Select();
-                    car_list[1].GetComponent<CarButtonController>().Click();
-                }
-                if (HANDLE_INPUT[i].Button(HC.Buttons.C, i))
-                {
-                    car_list[2].GetComponent<Button>().Select();
-                    car_list[2].GetComponent<CarButtonController>().Click();
+                    select_car = (select_car - 1) % car_list.Count;
+                    if (select_car < 0)
+                    {
+                        select_car = 2;
+                    }
+                    handle_trigger = true;
                 }
             }
             else
             {
-                if (HANDLE_INPUT[i].Button(HC.Buttons.X, i))
+                if (HANDLE_INPUT[0].LimitHandle(0) < 0.3f &&
+                  HANDLE_INPUT[0].LimitHandle(0) > -0.3f)
                 {
-                    parts_list[0].GetComponent<Button>().Select();
-                    parts_list[0].GetComponent<PartsButtonController>().Click();
+                    handle_trigger = false;
                 }
-                if (HANDLE_INPUT[i].Button(HC.Buttons.Y, i))
+            }
+
+            car_list[select_car].GetComponent<Button>().Select();
+
+            if(!button_trigger)
+            {
+                if (HANDLE_INPUT[0].Button(HC.Buttons.A, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.B, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.C, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.X, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
                 {
-                    parts_list[1].GetComponent<Button>().Select();
-                    parts_list[1].GetComponent<PartsButtonController>().Click();
+                    car_list[select_car].GetComponent<CarButtonController>().Click();
+                    button_trigger = true;
                 }
-                if (HANDLE_INPUT[i].Button(HC.Buttons.Z, i))
+            }
+        }
+        else
+        {
+            if (!handle_trigger)
+            {
+                if (HANDLE_INPUT[0].LimitHandle(0) > 0.5f)
                 {
-                    parts_list[2].GetComponent<Button>().Select();
-                    parts_list[2].GetComponent<PartsButtonController>().Click();
+                    select_parts = (select_parts + 1) % (parts_list.Count + 1);
+                    handle_trigger = true;
                 }
-                if (HANDLE_INPUT[i].Button(HC.Buttons.A, i))
+                else if (HANDLE_INPUT[0].LimitHandle(0) < -0.5f)
                 {
-                    back_button.GetComponent<Button>().Select();
-                    back_button.GetComponent<BackButtonController>().Click();
+                    select_parts = (select_parts - 1) % (parts_list.Count + 1);
+                    if (select_parts < 0)
+                    {
+                        select_parts = 3;
+                    }
+                    handle_trigger = true;
+                }
+            }
+            else
+            {
+                if (HANDLE_INPUT[0].LimitHandle(0) < 0.3f &&
+                  HANDLE_INPUT[0].LimitHandle(0) > -0.3f)
+                {
+                    handle_trigger = false;
+                }
+            }
+
+            if(select_parts != 3)
+            {
+                parts_list[select_parts].GetComponent<Button>().Select();
+            }
+            else
+            {
+                back_button.GetComponent<Button>().Select();
+            }
+
+            Debug.Log(select_parts);
+
+            if (!button_trigger)
+            {
+                if (HANDLE_INPUT[0].Button(HC.Buttons.A, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.B, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.C, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.X, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) ||
+                   HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
+                {
+                    if (select_parts != 3)
+                    {
+                        parts_list[select_parts].GetComponent<PartsButtonController>().Click();
+                    }
+                    else
+                    {
+                        back_button.GetComponent<BackButtonController>().Click();
+                    }
+                    button_trigger = true;
                 }
             }
         }
@@ -96,6 +174,7 @@ public class SelectManager : MonoBehaviour
         }
         //一番左ににフォーカスさせる
         EventSystem.current.SetSelectedGameObject(parts_list[0]);
+        select_parts = 0;
         //戻るボタンを出現させる
         back_button.SetActive(true);
 
@@ -138,6 +217,7 @@ public class SelectManager : MonoBehaviour
         }
         //一番左にフォーカスさせる
         EventSystem.current.SetSelectedGameObject(car_list[0]);
+        select_car = 0;
 
         //戻るボタンを非表示にする
         back_button.SetActive(false);

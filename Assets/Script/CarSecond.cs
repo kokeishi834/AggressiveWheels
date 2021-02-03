@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 using HandleC;
 using UnityEngine.UI;
 
-public class CarSecond : MonoBehaviourPunCallbacks
+public class CarSecond : MonoBehaviour
 {
     public int player_num;
     public Vector3 Gravity;
@@ -40,11 +38,12 @@ public class CarSecond : MonoBehaviourPunCallbacks
     GameObject speed_num = null;
 
     public GameObject hp_display = null;
-    int invincible_time = 0;//衝突時の無敵時間、これがないと連続で判定されてしまう
 
     Vector3 last_velocity;
 
-    bool drift;
+    int invincible_time = 0;//無敵時間
+
+    bool drift = false;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +63,6 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
         //仮設置移行予定
         max_hp = player_hp;
-        drift = false;
     }
 
     // Update is called once per frame
@@ -205,7 +203,7 @@ public class CarSecond : MonoBehaviourPunCallbacks
             this.GetComponent<PointController>().DeathPoint();
             player_hp = max_hp;
         }
-        //無敵時間がある時
+
         if(invincible_time > 0)
         {
             invincible_time--;
@@ -218,16 +216,15 @@ public class CarSecond : MonoBehaviourPunCallbacks
     //エネミーと当たった時
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy" && invincible_time == 0)
+        if (other.gameObject.tag == "Enemy" && invincible_time <= 0)
         {
+            int damage = 20;
             //体力減少
-            player_hp -= 20;
-            //HPバーの減少
-            float percentage = 1.0f - (float)(max_hp - 20) / max_hp;
-            hp_display.GetComponent<HPController>().Damage(
-                percentage);
-            //無敵時間の設定
-            invincible_time = 60;
+            player_hp -= damage;
+            GameObject hp_controller = GameObject.Find("HP");
+            float damage_percentage = (float)damage / max_hp;
+            invincible_time = 20;
+            hp_controller.GetComponent<HPController>().Damage(damage_percentage);
             //爆発エフェクトの呼び出し
             GameObject burst_spark = GameObject.Find("eff_burst_spark_blue");
             burst_spark.GetComponent<ExplosionController>().EffectPlay(this.transform.position);
@@ -236,15 +233,14 @@ public class CarSecond : MonoBehaviourPunCallbacks
 
     public void PlayerDamage(int damage, GameObject owner)
     {
-        if (owner.gameObject.tag == "Enemy")
+        if (owner.gameObject.tag == "Enemy" && invincible_time <= 0)
         {
             //体力減少
             player_hp -= damage;
-
-            //HPバーの減少
-            float percentage = 1.0f - (float)(max_hp - damage) / max_hp;
-            hp_display.GetComponent<HPController>().Damage(
-                percentage);
+            GameObject hp_controller = GameObject.Find("HP");
+            float damage_percentage = (float)damage / max_hp;
+            invincible_time = 20;
+            hp_controller.GetComponent<HPController>().Damage(damage_percentage);
         }
     }
 

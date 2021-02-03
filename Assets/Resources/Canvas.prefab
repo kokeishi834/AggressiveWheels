@@ -564,12 +564,12 @@ GameObject:
   - component: {fileID: 5571378837763464102}
   - component: {fileID: 5363499092260810483}
   m_Layer: 5
-  m_Name: HP
+  m_Name: HP_debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8841867033658338944
 RectTransform:
   m_ObjectHideFlags: 0

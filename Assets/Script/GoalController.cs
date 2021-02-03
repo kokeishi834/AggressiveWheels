@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 
-public class GoalController : MonoBehaviourPunCallbacks
+public class GoalController : MonoBehaviour
 {
     int point;
     int time = 0;//一人用で一時的に使う時間

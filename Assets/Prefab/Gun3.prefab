@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_num: 0
-  damage: 5
+  damage: 10
   late: 2
 --- !u!114 &2673765298920839898
 MonoBehaviour:

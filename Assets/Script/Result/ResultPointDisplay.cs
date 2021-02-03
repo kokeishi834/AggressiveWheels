@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
-public class ResultPointDisplay : MonoBehaviourPunCallbacks
+
+public class ResultPointDisplay : MonoBehaviour
 {
     GameObject result_point;
     // Start is called before the first frame update
