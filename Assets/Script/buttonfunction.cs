@@ -9,7 +9,7 @@ public class buttonfunction : MonoBehaviour
     // Start is called before the first frame update
     int car_num;
     int parts_num;
-
+    int player_num;
     public List<GameObject> buttons;
     bool handle_trigger = false;
     bool button_trigger = false;
@@ -116,15 +116,16 @@ public class buttonfunction : MonoBehaviour
         var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
 
         // データを渡す処理
-        gameManager.SetPlayerInfo(car_num, parts_num);
+        gameManager.SetPlayerInfo(car_num, parts_num,player_num);
 
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;
     }
 
-    public void SetCustomNum(int car,int parts)
+    public void SetCustomNum(int car,int parts,int p_num)
     {
         car_num = car;
         parts_num = parts;
+        player_num = p_num;
     }
 }

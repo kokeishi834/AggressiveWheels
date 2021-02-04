@@ -254,6 +254,11 @@ public class CarSecond : MonoBehaviour
 
     }
 
+    public void SetPlayerNum(int num)
+    {
+        player_num = num;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

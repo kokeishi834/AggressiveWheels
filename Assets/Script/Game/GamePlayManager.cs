@@ -38,11 +38,13 @@ public class GamePlayManager : MonoBehaviour
     }
 
     //SelectSceneからプレイヤーとパーツの選択情報をintで貰う関数
-    public void SetPlayerInfo(int car_num, int parts_num)
+    public void SetPlayerInfo(int car_num, int parts_num,int p_num)
     {
-        GameObject.Instantiate(obj[car_num], arrival_pos.transform.position, Quaternion.identity);
-        obj[car_num].GetComponent<CarSecond>().player_num = 1;
+        GameObject.Instantiate(obj[car_num], arrival_pos.transform.position,
+            Quaternion.identity);
+        obj[car_num].GetComponent<CarSecond>().SetPlayerNum(p_num);
         obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
+
         //Debug.Log("c" + car_num);
         //Debug.Log("p" + parts_num);
         

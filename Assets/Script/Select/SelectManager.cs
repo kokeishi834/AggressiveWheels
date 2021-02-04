@@ -15,7 +15,7 @@ public class SelectManager : MonoBehaviour
     int car_num = -1;
     int parts_num = -1;
 
-    HC[] HANDLE_INPUT = {new HC(), new HC()};
+    HC HANDLE_INPUT = new HC();
 
     bool handle_trigger = false;
     bool button_trigger = false;
@@ -24,6 +24,9 @@ public class SelectManager : MonoBehaviour
 
     public string to_scene;
 
+    public int player_num = 0;
+
+    public GameObject preview;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,16 +45,16 @@ public class SelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HANDLE_INPUT[0].UpdateJoyPad(0);
+        HANDLE_INPUT.UpdateJoyPad(player_num);
 
         if(button_trigger)
         {
-            if (!HANDLE_INPUT[0].Button(HC.Buttons.A, 0) &&
-               !HANDLE_INPUT[0].Button(HC.Buttons.B, 0) &&
-               !HANDLE_INPUT[0].Button(HC.Buttons.C, 0) &&
-               !HANDLE_INPUT[0].Button(HC.Buttons.X, 0) &&
-               !HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) &&
-               !HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
+            if (!HANDLE_INPUT.Button(HC.Buttons.A, player_num) &&
+               !HANDLE_INPUT.Button(HC.Buttons.B, player_num) &&
+               !HANDLE_INPUT.Button(HC.Buttons.C, player_num) &&
+               !HANDLE_INPUT.Button(HC.Buttons.X, player_num) &&
+               !HANDLE_INPUT.Button(HC.Buttons.Y, player_num) &&
+               !HANDLE_INPUT.Button(HC.Buttons.Z, player_num))
             {
                 button_trigger = false;
             }
@@ -60,12 +63,12 @@ public class SelectManager : MonoBehaviour
         {
             if (!handle_trigger)
             {
-                if (HANDLE_INPUT[0].LimitHandle(0) > 0.5f)
+                if (HANDLE_INPUT.LimitHandle(player_num) > 0.5f)
                 {
                     select_car = (select_car + 1) % car_list.Count;
                     handle_trigger = true;
                 }
-                else if (HANDLE_INPUT[0].LimitHandle(0) < -0.5f)
+                else if (HANDLE_INPUT.LimitHandle(player_num) < -0.5f)
                 {
                     select_car = (select_car - 1) % car_list.Count;
                     if (select_car < 0)
@@ -77,23 +80,24 @@ public class SelectManager : MonoBehaviour
             }
             else
             {
-                if (HANDLE_INPUT[0].LimitHandle(0) < 0.3f &&
-                  HANDLE_INPUT[0].LimitHandle(0) > -0.3f)
+                if (HANDLE_INPUT.LimitHandle(player_num) < 0.3f &&
+                  HANDLE_INPUT.LimitHandle(player_num) > -0.3f)
                 {
                     handle_trigger = false;
                 }
             }
 
+            preview.GetComponent<PreviewObject>().set_car(select_car);
             car_list[select_car].GetComponent<Button>().Select();
 
             if(!button_trigger)
             {
-                if (HANDLE_INPUT[0].Button(HC.Buttons.A, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.B, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.C, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.X, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
+                if (HANDLE_INPUT.Button(HC.Buttons.A, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.X, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.Y, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.Z, player_num))
                 {
                     car_list[select_car].GetComponent<CarButtonController>().Click();
                     button_trigger = true;
@@ -104,12 +108,12 @@ public class SelectManager : MonoBehaviour
         {
             if (!handle_trigger)
             {
-                if (HANDLE_INPUT[0].LimitHandle(0) > 0.5f)
+                if (HANDLE_INPUT.LimitHandle(player_num) > 0.5f)
                 {
                     select_parts = (select_parts + 1) % (parts_list.Count + 1);
                     handle_trigger = true;
                 }
-                else if (HANDLE_INPUT[0].LimitHandle(0) < -0.5f)
+                else if (HANDLE_INPUT.LimitHandle(player_num) < -0.5f)
                 {
                     select_parts = (select_parts - 1) % (parts_list.Count + 1);
                     if (select_parts < 0)
@@ -121,8 +125,8 @@ public class SelectManager : MonoBehaviour
             }
             else
             {
-                if (HANDLE_INPUT[0].LimitHandle(0) < 0.3f &&
-                  HANDLE_INPUT[0].LimitHandle(0) > -0.3f)
+                if (HANDLE_INPUT.LimitHandle(player_num) < 0.3f &&
+                  HANDLE_INPUT.LimitHandle(player_num) > -0.3f)
                 {
                     handle_trigger = false;
                 }
@@ -136,17 +140,17 @@ public class SelectManager : MonoBehaviour
             {
                 back_button.GetComponent<Button>().Select();
             }
-
+            preview.GetComponent<PreviewObject>().set_gun(select_parts);
             Debug.Log(select_parts);
 
             if (!button_trigger)
             {
-                if (HANDLE_INPUT[0].Button(HC.Buttons.A, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.B, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.C, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.X, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.Y, 0) ||
-                   HANDLE_INPUT[0].Button(HC.Buttons.Z, 0))
+                if (HANDLE_INPUT.Button(HC.Buttons.A, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.B, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.C, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.X, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.Y, player_num) ||
+                   HANDLE_INPUT.Button(HC.Buttons.Z, player_num))
                 {
                     if (select_parts != 3)
                     {
@@ -160,6 +164,8 @@ public class SelectManager : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     public void GetCarNum(int num)
@@ -237,7 +243,7 @@ public class SelectManager : MonoBehaviour
         var gameManager = GameObject.FindWithTag("SelectManager").GetComponent<buttonfunction>();
         
         // データを渡す処理
-        gameManager.SetCustomNum(car_num,parts_num);
+        gameManager.SetCustomNum(car_num,parts_num,player_num);
 
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;
