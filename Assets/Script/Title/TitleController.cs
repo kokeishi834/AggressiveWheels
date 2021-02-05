@@ -32,7 +32,7 @@ public class TitleController : MonoBehaviour
                HANDLE_INPUT[i].Button(HC.Buttons.Z, i)
                )
             {
-                SceneManager.LoadScene("SelectScene");
+                SceneManager.LoadScene("SelectGameMode");
             }
         }
     }

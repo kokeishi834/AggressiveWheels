@@ -153,6 +153,13 @@ public class CarSecond : MonoBehaviour
                 {
                     speed += accelerator;
                 }
+
+                drift = false;
+
+                if((Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake, player_num) > 0.1f))
+                {
+                    drift = true;
+                }
             }
             else if (Input.GetKey(KeyCode.DownArrow) || HANDLE_INPUT.Pedal(HC.Pedals.brake, player_num) > 0.1f)
             {
@@ -181,6 +188,8 @@ public class CarSecond : MonoBehaviour
 
             speed_meter.GetComponent<Image>().fillAmount = (float)(speed / max_speed);
             speed_num.GetComponent<Text>().text = ((int)speed).ToString();
+
+            if(!drift)
             rb.velocity = new Vector3(transform.forward.x * speed, rb.velocity.y, transform.forward.z * speed);
         }
 

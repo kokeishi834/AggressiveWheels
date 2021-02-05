@@ -7,7 +7,9 @@ public class CheckPlayManager : MonoBehaviour
     int count;
     public int check_num = 0;//一人用で一時的に使う
     public GameObject[] obj = null;
+    public GameObject[] check_obj = null;
     [SerializeField] GameObject goal = null;
+    public GameObject arrival_pos;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +19,11 @@ public class CheckPlayManager : MonoBehaviour
         {
             if (i == 0)
             {
-                obj[i].SetActive(true);
+                check_obj[i].SetActive(true);
             }
             else
             {
-                obj[i].SetActive(false);
+                check_obj[i].SetActive(false);
             }
         }
     }
@@ -35,9 +37,9 @@ public class CheckPlayManager : MonoBehaviour
     //SelectSceneからプレイヤーとパーツの選択情報をintで貰う関数
     public void SetPlayerInfo(int car_num, int parts_num)
     {
-        //GameObject.Instantiate(obj[car_num], arrival_pos.transform.position,
-        //    Quaternion.identity);
-        //obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
+        GameObject.Instantiate(obj[car_num], arrival_pos.transform.position,
+            Quaternion.identity);
+        obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
     }
 
     //一人用専用関数、後に変更
@@ -47,7 +49,7 @@ public class CheckPlayManager : MonoBehaviour
         //次のチェックポイントを起動
         if (check_num > count)
         {
-            obj[count].SetActive(true);
+            check_obj[count].SetActive(true);
         }
 
         if (count >= check_num)//チェックポイントを通過したらゴールを出現させる,30fps

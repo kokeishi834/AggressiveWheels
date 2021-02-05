@@ -9,7 +9,6 @@ public class buttonfunction : MonoBehaviour
     // Start is called before the first frame update
     int car_num;
     int parts_num;
-    int player_num;
     public List<GameObject> buttons;
     bool handle_trigger = false;
     bool button_trigger = false;
@@ -86,15 +85,36 @@ public class buttonfunction : MonoBehaviour
                 switch(select_button)
                 {
                     case 0:
-                        StringArgFunction("MakeStage1");
+                        if(game_mode == 0)
+                        {
+                            StringArgFunction("CheckPointStage1");
+                        }
+                        else
+                        {
+                            StringArgFunction("MakeStage1");
+                        }
                         break;
 
                     case 1:
-                        StringArgFunction("MakeStage2");
+                        if (game_mode == 0)
+                        {
+                            StringArgFunction("CheckPointStage2");
+                        }
+                        else
+                        {
+                            StringArgFunction("MakeStage2");
+                        }
                         break;
 
                     case 2:
-                        StringArgFunction("MakeStage3");
+                        if (game_mode == 0)
+                        {
+                            StringArgFunction("CheckPointStage3");
+                        }
+                        else
+                        {
+                            StringArgFunction("MakeStage3");
+                        }
                         break;
 
                     case 3:
@@ -119,25 +139,23 @@ public class buttonfunction : MonoBehaviour
         // シーン切り替え後のスクリプトを取得
         if(game_mode == 0)
         {
-            var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
+            var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<CheckPlayManager>();
             // データを渡す処理
-            gameManager.SetPlayerInfo(car_num, parts_num, player_num);
+            gameManager.SetPlayerInfo(car_num, parts_num);
         }
         if (game_mode == 1)
         {
             var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
             // データを渡す処理
-            gameManager.SetPlayerInfo(car_num, parts_num, player_num);
+            gameManager.SetPlayerInfo(car_num, parts_num);
         }
-
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;
     }
 
-    public void SetCustomNum(int car,int parts,int p_num)
+    public void SetCustomNum(int car,int parts)
     {
         car_num = car;
         parts_num = parts;
-        player_num = p_num;
     }
 }

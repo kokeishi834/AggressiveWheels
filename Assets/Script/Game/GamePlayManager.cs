@@ -38,11 +38,10 @@ public class GamePlayManager : MonoBehaviour
     }
 
     //SelectSceneからプレイヤーとパーツの選択情報をintで貰う関数
-    public void SetPlayerInfo(int car_num, int parts_num,int p_num)
+    public void SetPlayerInfo(int car_num, int parts_num)
     {
         GameObject.Instantiate(obj[car_num], arrival_pos.transform.position,
             Quaternion.identity);
-        obj[car_num].GetComponent<CarSecond>().SetPlayerNum(p_num);
         obj[car_num].GetComponent<CarSecond>().SetGun(parts_num);
 
         //Debug.Log("c" + car_num);
@@ -55,7 +54,7 @@ public class GamePlayManager : MonoBehaviour
     public void KillEnemy()
     {
         kill_enemy_num++;
-        if (/*count >= goal_appearance * 30*/ kill_enemy_num >= enemy_num)//指定の時間が経過したらゴールを出現させる,30fps
+        if (kill_enemy_num >= enemy_num)//指定の時間が経過したらゴールを出現させる,30fps
         {
             goal.SetActive(true);
             goal.GetComponent<GoalController>().SetCount(count);

@@ -9,6 +9,8 @@ TagManager:
   - GamePlayManager
   - PlayerCamera
   - SelectManager
+  - CheckPoint
+  - Score
   layers:
   - Default
   - TransparentFX
