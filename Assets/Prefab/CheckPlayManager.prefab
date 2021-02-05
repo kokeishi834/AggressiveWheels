@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   check_num: 0
-  obj: []
+  obj:
+  - {fileID: 2492183517265902079, guid: 679b5c2d813a805458032986b7faf5c9, type: 3}
+  - {fileID: 4442603567289306947, guid: c0de7f2e5d56dae429da743565a1914b, type: 3}
+  - {fileID: 3100606839090152805, guid: 5decc4b34040f1b46a1dd0020967e26f, type: 3}
   goal: {fileID: 0}
+  arrival_pos: {fileID: 0}

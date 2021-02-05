@@ -28,6 +28,8 @@ public class GoalController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            GameObject score = GameObject.FindWithTag("Score");
+            time = score.GetComponent<TimeDisplay>().GetTime();
             // イベントに登録
             SceneManager.sceneLoaded += GameSceneLoaded;
 
@@ -59,5 +61,7 @@ public class GoalController : MonoBehaviour
     public void SetCount(int count)
     {
         time += count;
+        //.Log(count);
+        //Debug.Log(time);
     }
 }

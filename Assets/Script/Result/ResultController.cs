@@ -39,7 +39,7 @@ public class ResultController : MonoBehaviour
     }
 
     //一人用で一時的に使う時間取得の関数、後に削除
-    public int SetResultTime()
+    public int GetResultTime()
     {
         return time;
     }

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4589198130870962997}
   - component: {fileID: 4589198130870962995}
   - component: {fileID: 4589198130870962996}
-  - component: {fileID: 4589198130870962994}
+  - component: {fileID: 297706547005561633}
   m_Layer: 5
-  m_Name: ScoreText
+  m_Name: ResultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,8 +78,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
---- !u!114 &4589198130870962994
+  m_Text: Result
+--- !u!114 &297706547005561633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4589198130870962998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219dfd7e2430a2041bff2e7623c76177, type: 3}
+  m_Script: {fileID: 11500000, guid: c6fd2a5321a7fac4ebe3248ad323a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4589198131597652908
