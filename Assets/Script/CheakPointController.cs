@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CheakPointController : MonoBehaviour
 {
-    int point;//チェックポイントの得点
+    
     // Start is called before the first frame update
     void Start()
     {
-        point = 10;
+        
     }
 
     // Update is called once per frame
@@ -22,9 +22,9 @@ public class CheakPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //ポイントを渡して消滅
-            other.gameObject.GetComponent<PointController>().PlusPoint(point);
-            Destroy(this.gameObject);
+            GameObject manager = GameObject.Find("CheckPlayManager");
+            manager.GetComponent<CheckPlayManager>().Pass_Check();
+            this.gameObject.SetActive(false);
         }
     }
 }

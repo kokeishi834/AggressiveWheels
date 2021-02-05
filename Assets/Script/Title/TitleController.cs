@@ -11,14 +11,6 @@ public class TitleController : MonoBehaviour
 
     int use_display_num = 2;
 
-    private void Awake()
-    {
-        int display_num = Mathf.Min(Display.displays.Length, use_display_num);
-        for (int i = 0; i < display_num; i++)
-        {
-            Display.displays[i].Activate();
-        }
-    }
     void Start()
     {
         

@@ -17,16 +17,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 1851d442c6a28d741a7bbe0fd89be309
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MakeStage1.unity
     guid: 61578da1604e0254dad7d39f6c6a0a2f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MakeStage2.unity
     guid: 52b1fd3436e85324f976244209ee9340
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MakeStage3.unity
     guid: 4c6b0ceb6485c8e469a94ec1e1d56710
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ResultScene.unity
     guid: 36a5ef68180af3149ade2f07d4566603
   - enabled: 0

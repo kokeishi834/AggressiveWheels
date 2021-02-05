@@ -17,9 +17,13 @@ public class buttonfunction : MonoBehaviour
     int select_button = 0;
 
     HC HANDLE_INPUT = new HC();
+
+    int game_mode = 0;
     void Start()
     {
-        
+        game_mode = PlayerPrefs.GetInt("GameMode");
+
+        Debug.Log("GAME_MODE" + game_mode);
     }
 
     // Update is called once per frame
@@ -113,10 +117,18 @@ public class buttonfunction : MonoBehaviour
     {
 
         // シーン切り替え後のスクリプトを取得
-        var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
-
-        // データを渡す処理
-        gameManager.SetPlayerInfo(car_num, parts_num,player_num);
+        if(game_mode == 0)
+        {
+            var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
+            // データを渡す処理
+            gameManager.SetPlayerInfo(car_num, parts_num, player_num);
+        }
+        if (game_mode == 1)
+        {
+            var gameManager = GameObject.FindWithTag("GamePlayManager").GetComponent<GamePlayManager>();
+            // データを渡す処理
+            gameManager.SetPlayerInfo(car_num, parts_num, player_num);
+        }
 
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;
