@@ -50,7 +50,7 @@ public class GoalController : MonoBehaviour
         //int point = point_object.GetComponent<PointController>().GetPoint();
 
         // データを渡す処理
-        gameManager.SetResultScore(point + (60 - time));
+        gameManager.SetResultScore(point);
         gameManager.SetResultTime(time);
 
         // イベントから削除
